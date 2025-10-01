@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7sr04re2crqo"]
+
+[ext_resource type="Script" uid="uid://ciqc0sopx4h8s" path="res://main_menu/meta_option/upgrade.gd" id="1_aoows"]
+[ext_resource type="Texture2D" uid="uid://bis7jbsvac06c" path="res://player/attack/upgrade_icon/none.png" id="2_lty1a"]
+[ext_resource type="Texture2D" uid="uid://busxyi1d4dm1r" path="res://player/attack/upgrade_icon/attack_speed.png" id="3_lty1a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aoows"]
+font_size = 11
+
+[node name="upgrade_button" type="ColorRect"]
+offset_right = 50.0
+offset_bottom = 50.0
+color = Color(0.196078, 0.196078, 0.196078, 1)
+script = ExtResource("1_aoows")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = 38.0
+offset_right = 50.0
+offset_bottom = 50.0
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 36.0
+offset_right = 50.0
+offset_bottom = 52.0
+text = "5 / 5"
+label_settings = SubResource("LabelSettings_aoows")
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 16.0
+scale = Vector2(2.3, 2.3)
+texture_normal = ExtResource("2_lty1a")
+texture_hover = ExtResource("3_lty1a")
+stretch_mode = 3
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

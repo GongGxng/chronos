@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy6oigr1830f7"]
+
+[ext_resource type="Script" uid="uid://bxdifmt6ckqjt" path="res://start_game.gd" id="1_i1pu1"]
+[ext_resource type="PackedScene" uid="uid://dvutjrushh2kc" path="res://Map/proc_gen_world.tscn" id="1_ipysq"]
+[ext_resource type="PackedScene" uid="uid://30vmw6kcp6p5" path="res://player/character.tscn" id="2_redxk"]
+[ext_resource type="PackedScene" uid="uid://dyww5tfaimfuj" path="res://Map/enemy_spawner.tscn" id="3_i1pu1"]
+[ext_resource type="Texture2D" uid="uid://26ii62yor0m3" path="res://texture/pixilart-drawing.png" id="4_mywg3"]
+[ext_resource type="PackedScene" uid="uid://cobj0hilcud10" path="res://objects/Expgem.tscn" id="5_vmqqe"]
+[ext_resource type="PackedScene" uid="uid://c30dmscl4ogfb" path="res://objects/time_orb.tscn" id="6_xpden"]
+[ext_resource type="PackedScene" uid="uid://wsjurfq44xh" path="res://main_menu/pause_memu.tscn" id="7_redxk"]
+[ext_resource type="PackedScene" uid="uid://g5ob7r4gi72l" path="res://objects/coins.tscn" id="8_mywg3"]
+
+[node name="Start_game" type="Node2D"]
+script = ExtResource("1_i1pu1")
+
+[node name="y_sort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="proc_gen_world" parent="y_sort" instance=ExtResource("1_ipysq")]
+unique_name_in_owner = true
+
+[node name="Character" parent="y_sort" instance=ExtResource("2_redxk")]
+current_time = 300
+
+[node name="enemy_spawner" parent="y_sort" instance=ExtResource("3_i1pu1")]
+
+[node name="background" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_mywg3")
+region_enabled = true
+region_rect = Rect2(-0.25, 0, 4000, 4000)
+
+[node name="loot" type="Node2D" parent="."]
+
+[node name="Exp" parent="loot" instance=ExtResource("5_vmqqe")]
+position = Vector2(-221, -122)
+
+[node name="Time_orb" parent="loot" instance=ExtResource("6_xpden")]
+position = Vector2(0, -144)
+
+[node name="coins" parent="loot" instance=ExtResource("8_mywg3")]
+position = Vector2(157, -115)
+coins = 10
+
+[node name="coins2" parent="loot" instance=ExtResource("8_mywg3")]
+position = Vector2(188, -118)
+coins = 10
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="pause_memu" parent="CanvasLayer" instance=ExtResource("7_redxk")]
+
+[connection signal="map_number" from="y_sort/proc_gen_world" to="y_sort/enemy_spawner" method="_on_proc_gen_world_map_number"]

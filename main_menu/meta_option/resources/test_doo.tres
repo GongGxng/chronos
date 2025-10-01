@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=3 format=3 uid="uid://c5iemrqmorgf1"]
+
+[ext_resource type="Texture2D" uid="uid://b5hk1luxlb7ml" path="res://player/attack/weapon_icon/ice_cubetest.png" id="1_t113p"]
+[ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="2_n5h5h"]
+
+[resource]
+script = ExtResource("2_n5h5h")
+name = "damage_lv"
+description = "des_test"
+icon = ExtResource("1_t113p")
+cost = 1
+level = 0
+max_level = 10
+metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

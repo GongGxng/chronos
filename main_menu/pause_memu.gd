@@ -1,0 +1,38 @@
+extends Control
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var panel_container: PanelContainer = $PanelContainer
+
+var upgrade_menu = "res://main_menu/upgrade_menu.tscn"
+
+func _ready() -> void:
+	animation_player.play("RESET")
+
+func resume():
+	get_tree().paused = false
+	animation_player.play_backwards("blur")
+
+func pause():
+	get_tree().paused = true
+	animation_player.play("blur")
+	
+func esc():
+	if Input.is_action_just_pressed("Esc") and !get_tree().paused:
+		pause()
+
+	elif Input.is_action_just_pressed("Esc") and get_tree().paused:
+		resume()
+
+func _on_resume_pressed() -> void:
+	resume()
+
+func _on_restart_pressed() -> void:
+	resume()
+	get_tree().reload_current_scene()
+
+func _on_quit_pressed() -> void:
+	if get_tree().paused == true:
+		get_tree().paused = false
+	get_tree().change_scene_to_file(upgrade_menu)
+
+func _process(_delta: float) -> void:
+	esc()

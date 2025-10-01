@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo3g37al27m3h"]
+
+[ext_resource type="Script" uid="uid://bk5qyui6whgw6" path="res://main_menu/upgrade_menu.gd" id="1_aht8p"]
+[ext_resource type="PackedScene" uid="uid://b7sr04re2crqo" path="res://main_menu/meta_option/upgrade_button.tscn" id="2_prhyw"]
+[ext_resource type="Resource" uid="uid://c5iemrqmorgf1" path="res://main_menu/meta_option/resources/test_doo.tres" id="3_np1eh"]
+
+[node name="Upgrade_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aht8p")
+
+[node name="back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "Back
+"
+
+[node name="start" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -48.0
+offset_right = -24.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Start"
+
+[node name="save" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -16.0
+offset_right = 36.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "save"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 51.0
+offset_bottom = 35.0
+text = "0"
+
+[node name="up_lv" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.43
+anchor_bottom = 0.792
+offset_right = -0.200012
+offset_bottom = -0.120026
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="upgrade_button" parent="up_lv" instance=ExtResource("2_prhyw")]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 96.0
+offset_right = 186.0
+offset_bottom = 146.0
+upgrade_option = ExtResource("3_np1eh")
+
+[node name="confirm_button" type="Button" parent="up_lv"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 107.0
+offset_right = 347.0
+offset_bottom = 138.0
+text = "confirm
+"
+
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="up_lv/confirm_button" to="up_lv/upgrade_button" method="_on_confirm_button_pressed"]

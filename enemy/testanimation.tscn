@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkyv5f64coxud"]
+
+[ext_resource type="Script" uid="uid://ilhwikm8waro" path="res://enemy/testanimation.gd" id="1_nww8a"]
+[ext_resource type="Texture2D" uid="uid://bgwvtje2t16nl" path="res://enemy/image_enemy/IMG_0792.PNG" id="2_mdx08"]
+
+[sub_resource type="Animation" id="Animation_0qubm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ndcco"]
+resource_name = "testty"
+length = 1.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.466667, 0.7, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w10u7"]
+_data = {
+&"RESET": SubResource("Animation_0qubm"),
+&"testty": SubResource("Animation_ndcco")
+}
+
+[node name="testanimation" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_nww8a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0546875, 0.0546875)
+texture = ExtResource("2_mdx08")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w10u7")
+}

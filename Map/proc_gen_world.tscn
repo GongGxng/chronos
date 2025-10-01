@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvutjrushh2kc"]
+
+[ext_resource type="Script" uid="uid://cct2s567ajqo1" path="res://Map/proc_gen_world.gd" id="1_8ht5p"]
+[ext_resource type="TileSet" uid="uid://dgklfopu36ld" path="res://Map/proc_gen_world.tres" id="2_2aqej"]
+
+[sub_resource type="Gradient" id="Gradient_2aqej"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.530864)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ivhox"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tmdtq"]
+color_ramp = SubResource("Gradient_2aqej")
+noise = SubResource("FastNoiseLite_ivhox")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2aqej"]
+frequency = 0.35
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ivhox"]
+noise = SubResource("FastNoiseLite_2aqej")
+
+[node name="proc_gen_world" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_8ht5p")
+noise_height_text = SubResource("NoiseTexture2D_tmdtq")
+noise_prop_text = SubResource("NoiseTexture2D_ivhox")
+
+[node name="TileMap2" type="TileMap" parent="."]
+y_sort_enabled = true
+tile_set = ExtResource("2_2aqej")
+format = 2
+
+[node name="ground1" type="TileMapLayer" parent="TileMap2"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_2aqej")
+
+[node name="ground2" type="TileMapLayer" parent="TileMap2"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_2aqej")
+
+[node name="prop" type="TileMapLayer" parent="TileMap2"]
+y_sort_enabled = true
+use_parent_material = true
+tile_set = ExtResource("2_2aqej")

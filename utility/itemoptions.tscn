@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdawnpv784hkn"]
+
+[ext_resource type="Script" uid="uid://c3crck222cvnq" path="res://utility/itemoptions.gd" id="1_qww08"]
+[ext_resource type="Texture2D" uid="uid://2plht0nu7lvf" path="res://player/image_player/IMG_0798.PNG" id="2_3wpar"]
+
+[node name="itemoptions" type="ColorRect"]
+custom_minimum_size = Vector2(180, 50)
+anchors_preset = -1
+anchor_right = 0.281
+anchor_bottom = 0.139
+offset_right = 0.159988
+offset_bottom = -0.0400047
+color = Color(0.597176, 0.597176, 0.597176, 1)
+script = ExtResource("1_qww08")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+color = Color(0.201527, 0.201527, 0.201527, 1)
+
+[node name="itemicon" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("2_3wpar")
+expand_mode = 1
+
+[node name="lbl_name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 2.0
+offset_right = 86.0
+offset_bottom = 25.0
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lbl_info" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 166.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 8
+text = "info info info"
+autowrap_mode = 3
+
+[node name="lbl_level" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 1.0
+offset_right = 175.0
+offset_bottom = 24.0
+text = "1"
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

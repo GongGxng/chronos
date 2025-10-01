@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://d24g6sofertpr"]
+
+[ext_resource type="Texture2D" uid="uid://26ii62yor0m3" path="res://texture/pixilart-drawing.png" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://30vmw6kcp6p5" path="res://player/character.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://cobj0hilcud10" path="res://objects/Expgem.tscn" id="4_036b0"]
+[ext_resource type="PackedScene" uid="uid://dyww5tfaimfuj" path="res://utility/enemy_spawner.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://dvutjrushh2kc" path="res://Map/proc_gen_world.tscn" id="5_036b0"]
+
+[node name="World" type="Node2D"]
+
+[node name="proc_gen_world" parent="." instance=ExtResource("5_036b0")]
+
+[node name="background" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_fj7yv")
+region_enabled = true
+region_rect = Rect2(-0.25, 0, 4000, 4000)
+
+[node name="Character" parent="." instance=ExtResource("2_fj7yv")]
+
+[node name="enemy_spawner" parent="." instance=ExtResource("4_aqk2v")]
+
+[node name="loot" type="Node2D" parent="."]
+
+[node name="Exp" parent="loot" instance=ExtResource("4_036b0")]
+position = Vector2(192, -45)
+experience = 50
