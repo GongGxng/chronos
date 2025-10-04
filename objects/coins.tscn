@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://g5ob7r4gi72l"]
+[gd_scene load_steps=6 format=3 uid="uid://g5ob7r4gi72l"]
 
 [ext_resource type="Script" uid="uid://djuj7afw2lr8a" path="res://objects/coins.gd" id="1_21hed"]
-[ext_resource type="Texture2D" uid="uid://lex5m8qs3w20" path="res://objects/coins1.png" id="2_bj2fl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bj2fl"]
 radius = 4.0
@@ -53,7 +52,6 @@ script = ExtResource("1_21hed")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.8125)
-texture = ExtResource("2_bj2fl")
 offset = Vector2(0, -1)
 hframes = 6
 

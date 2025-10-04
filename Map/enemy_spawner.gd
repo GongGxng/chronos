@@ -1,10 +1,12 @@
 extends Node2D
 
-@export var spawn: Array[Spawn_info] = []
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var proc_gen_world = get_node("%proc_gen_world")
 
+@export var spawn: Array[Spawn_info] = []
 @export var time = 0
+@export var hp_growth_rate: float = 1.1  
+
 var map_numselection = 0
 
 func _on_proc_gen_world_map_number(map:int) -> void:

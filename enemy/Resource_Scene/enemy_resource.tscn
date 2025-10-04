@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ckfvqrvltyjxe"]
 
 [ext_resource type="Script" uid="uid://nd3m05wshvqy" path="res://enemy/Resource_Scene/enemy_resource.gd" id="1_hn4hv"]
-[ext_resource type="Texture2D" uid="uid://d04mcl4mqxocm" path="res://enemy/image_enemy/MONSTERminiboss-Sheet.png" id="2_4p15l"]
+[ext_resource type="Texture2D" uid="uid://dl6n6asphqr4o" path="res://player/image_player/281075558_516860756567930_8764328684380126817_n.jpg" id="2_hn4hv"]
 [ext_resource type="PackedScene" uid="uid://c8mppk6beyulp" path="res://utility/hurt_box.tscn" id="3_t0kjd"]
 [ext_resource type="PackedScene" uid="uid://byxlprmy3k5oa" path="res://utility/hit_box.tscn" id="4_wvf2l"]
 
@@ -35,10 +35,10 @@ tracks/0/path = NodePath("Sprite2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ifi0"]
@@ -61,14 +61,14 @@ collision_layer = 5
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_hn4hv")
+movement_speed = 20
 can_drop_time_orb = false
 
 [node name="Sprite2" type="Sprite2D" parent="."]
-position = Vector2(2.5, -2.38419e-07)
-scale = Vector2(0.953125, 0.96875)
-texture = ExtResource("2_4p15l")
-hframes = 2
-vframes = 2
+position = Vector2(0, 18)
+scale = Vector2(0.0187185, 0.0190254)
+texture = ExtResource("2_hn4hv")
+offset = Vector2(0, -950)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_0b31y")

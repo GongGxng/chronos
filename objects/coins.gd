@@ -16,12 +16,11 @@ var speed = -0.5
 #@onready var upgrade_menu = get_node("res://main_menu/upgrade_menu.tscn")
 
 func _ready():
+    animetion.play("coins_spin")
     if coins >= 1:
         sprite.texture = spr_coins1
     elif coins >= 5:
         sprite.texture = spr_coins
-
-    animetion.play("coins_spin")
 
 func _process(delta):
     if target != null:

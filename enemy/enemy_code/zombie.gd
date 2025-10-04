@@ -25,7 +25,7 @@ var coins_scene = preload("res://objects/coins.tscn")
 
 signal remove_from_array(object)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * movement_speed
@@ -41,20 +41,26 @@ func _ready():
 	animation.play("test")
 	hitBox.damage = enemy_damage
 
+func random_position():
+	var random_offset = Vector2(randf_range(-10, 10), randf_range(-10, 10))
+	return global_position + random_offset
+
 func death():
 	emit_signal("remove_from_array", self)
 	if can_drop_time_orb:
 		var new_time_orb = time_orb_scene.instantiate()
-		new_time_orb.global_position = global_position
+		new_time_orb.global_position = random_position()
 		new_time_orb.time_orb_amount = time_orb_amount
 		loot_base.call_deferred("add_child", new_time_orb)
 
-	var new_coins = coins_scene.instantiate()
-	new_coins.global_position = global_position
-	new_coins.coins = coins_amount
-	loot_base.call_deferred("add_child", new_coins)
+	if randi() % 2 == 0:
+		var new_coins = coins_scene.instantiate()
+		new_coins.global_position = random_position()
+		new_coins.coins = coins_amount
+		loot_base.call_deferred("add_child", new_coins)
+	
 	var new_gem = exp_gem.instantiate()
-	new_gem.global_position = global_position
+	new_gem.global_position = random_position()
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
 	queue_free()

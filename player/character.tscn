@@ -231,6 +231,7 @@ offset_right = 69.0
 offset_bottom = 56.0
 text = "coin :"
 
+[connection signal="timeout" from="skill_timer" to="." method="_on_skill_timer_timeout"]
 [connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="attack/ice_cubeTimer" to="." method="_on_ice_cube_timer_timeout"]
 [connection signal="timeout" from="attack/ice_cubeTimer/ice_cubeAttackTimer" to="." method="_on_ice_cube_attack_timer_timeout"]

@@ -44,7 +44,6 @@ func _on_texture_button_pressed() -> void:
 			update()
 
 func _on_mouse_entered() -> void:
-	icon_hover
 	emit_signal("upgrade_hovered", name_display, description)
 
 func _on_mouse_exited() -> void:

@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://byxlprmy3k5oa" path="res://utility/hit_box.tscn" id="4_8wb6y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b31y"]
-radius = 7.0
-height = 32.0
+radius = 8.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_6f005"]
 length = 0.001
@@ -61,19 +61,20 @@ collision_layer = 5
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_dp161")
-movement_speed = 12
+movement_speed = 10
 hp = 50
 resistance = 5
 
 [node name="Sprite2" type="Sprite2D" parent="."]
-position = Vector2(-1.14441e-05, 1.19209e-07)
+position = Vector2(-1.42109e-14, 36)
 scale = Vector2(0.96875, 0.96875)
 texture = ExtResource("2_dp161")
-offset = Vector2(4, 0)
+offset = Vector2(0, -38)
 hframes = 2
 vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_0b31y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

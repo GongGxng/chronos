@@ -71,32 +71,32 @@ const UPGRADES = {
         },
         "speed1": {
             "icon": ICON_PATH + "boots.png",
-            "displayname": "none",
-            "details": "Movement none Increased by 50% of base speed",
+            "displayname": "Speed",
+            "details": "Movement Speed Increased by 50% of base speed",
             "level": "Level: 1",
             "prerequisite": [],
             "type": "upgrade"
         },
         "speed2": {
             "icon": ICON_PATH + "boots.png",
-            "displayname": "none",
-            "details": "Movement none Increased by an additional 50% of base speed",
+            "displayname": "Speed",
+            "details": "Movement Speed Increased by an additional 50% of base speed",
             "level": "Level: 2",
             "prerequisite": ["speed1"],
             "type": "upgrade"
         },
         "speed3": {
             "icon": ICON_PATH + "boots.png",
-            "displayname": "none",
-            "details": "Movement none Increased by an additional 50% of base speed",
+            "displayname": "Speed",
+            "details": "Movement Speed Increased by an additional 50% of base speed",
             "level": "Level: 3",
             "prerequisite": ["speed2"],
             "type": "upgrade"
         },
         "speed4": {
             "icon": ICON_PATH + "boots.png",
-            "displayname": "none",
-            "details": "Movement none Increased an additional 50% of base speed",
+            "displayname": "Speed",
+            "details": "Movement Speed Increased an additional 50% of base speed",
             "level": "Level: 4",
             "prerequisite": ["speed3"],
             "type": "upgrade"

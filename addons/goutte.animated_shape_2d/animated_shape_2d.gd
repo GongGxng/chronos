@@ -101,7 +101,7 @@ func _ready():
 		set_physics_process(false)
 
 
-func _physics_process(_delta: float):
+func _physics_process(delta: float):
 	if self.is_tweening_collision_shape_position:
 		tween_collision_shape_position()
 	if self.is_tweening_collision_shape_shape:

@@ -29,7 +29,17 @@ autowrap_mode = 2
 
 [node name="Info_of_upgrade" type="Label" parent="PopupPanel/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10.695)
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "descrition "
+autowrap_mode = 2
+
+[node name="Info_of_upgrade2" type="Label" parent="PopupPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 15
+text = "ราคา"
+horizontal_alignment = 1
 autowrap_mode = 2

@@ -65,7 +65,8 @@ var coins_collect = 0
 
 func _ready() -> void:
 	upgrade_effect()
-	upgrade_charecter("ice_cube1")
+	upgrade_charecter("ice_cube4")
+	upgrade_charecter("star4")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
@@ -135,9 +136,9 @@ func trigger_game_over() -> void:
 	#Engine.time_scale = slowmo_time_scale
 	print("Game Over")
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not is_game_over:
-		update_time(_delta)
+		update_time(delta)
 
 	var mouse_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	if mouse_direction.x < 0 and Sprite.flip_h:
@@ -367,11 +368,13 @@ var can_teleport : bool = true
 
 func start_cooldown():
 	can_teleport = false
+	print("Teleport on cooldown!")
 	skill_timer.start()
-	skill_timer.timeout.connect(func():
-		can_teleport = true
-		print("Teleport ready again!")
-		return can_teleport)
+
+func _on_skill_timer_timeout() -> void:
+	can_teleport = true
+	print("Teleport ready again!")
+
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and Input.is_action_pressed("active_skill"):

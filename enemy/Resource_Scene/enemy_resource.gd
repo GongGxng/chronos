@@ -15,47 +15,58 @@ extends CharacterBody2D
 @export var resistance = 10
 @export var enemy_damage = 1
 @export var can_drop_time_orb = true
+@export var hp_growth_rate: float = 1.1
+@export var max_hp: int = 100
 
 var knockback = Vector2.ZERO
 var exp_gem = preload("res://objects/Expgem.tscn")
 var time_orb_scene = preload("res://objects/time_orb.tscn")
 var coins_scene = preload("res://objects/coins.tscn")
+var elapsed_time: float = 0
 
 signal remove_from_array(object)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * movement_speed
 	velocity += (knockback / resistance)
 	move_and_slide()
-	move_and_collide(velocity * _delta)
 
 	if direction.x > 0.1:
 		Sprite.flip_h = true
 	elif direction.x < -0.1:
 		Sprite.flip_h = false
-	
+
+func _process(delta: float) -> void:
+	elapsed_time += delta
+
 func _ready():
 	hitBox.damage = enemy_damage
 	animation.play("orcwalk")
+
+func random_position():
+	var random_offset = Vector2(randf_range(-10, 10), randf_range(-10, 10))
+	return global_position + random_offset
 
 func death():
 	emit_signal("remove_from_array", self)
 	if can_drop_time_orb:
 		var new_time_orb = time_orb_scene.instantiate()
-		new_time_orb.global_position = global_position
+		new_time_orb.global_position = random_position()
 		new_time_orb.time_orb_amount = time_orb_amount
 		loot_base.call_deferred("add_child", new_time_orb)
-
-	var new_coins = coins_scene.instantiate()
-	new_coins.global_position = global_position
-	new_coins.coins = coins_amount
-	loot_base.call_deferred("add_child", new_coins)
+	#randomize loot drop
+	if randi() % 2 == 0:
+		var new_coins = coins_scene.instantiate()
+		new_coins.global_position = random_position()
+		new_coins.coins = coins_amount
+		loot_base.call_deferred("add_child", new_coins)
 	var new_gem = exp_gem.instantiate()
-	new_gem.global_position = global_position
+	new_gem.global_position = random_position()
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
+	get_scaled_hp()
 	queue_free()
 
 func _on_hurtbox_hurt(damage, angle, knockback_amount) -> void:
@@ -63,3 +74,8 @@ func _on_hurtbox_hurt(damage, angle, knockback_amount) -> void:
 	knockback = angle * knockback_amount
 	if hp <= 0:
 		death()
+var new_hp :int
+func get_scaled_hp() -> int:
+	new_hp += hp * pow(hp_growth_rate, elapsed_time / 60.0)
+	print("Scaled HP: ", new_hp)
+	return int(min(hp, max_hp))

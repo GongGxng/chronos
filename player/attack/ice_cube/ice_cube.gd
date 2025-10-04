@@ -10,11 +10,13 @@ var attack_size = 1
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var player = get_tree().get_first_node_in_group("player")
 
 signal remove_from_array(object)
 
 func _ready():
+	animation_player.play("bullet")
 	angle = global_position.direction_to(target)
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
