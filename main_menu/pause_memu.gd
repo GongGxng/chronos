@@ -33,6 +33,7 @@ func _on_quit_pressed() -> void:
 	if get_tree().paused == true:
 		get_tree().paused = false
 	get_tree().change_scene_to_file(upgrade_menu)
+	SaveDb.save_game()
 
 func _process(_delta: float) -> void:
 	esc()

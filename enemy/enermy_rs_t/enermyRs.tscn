@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbjoqd23vr2f0"]
-
-[ext_resource type="Script" uid="uid://mjdjyla75yft" path="res://enemy/enermy_rs_t/enemy_rs.gd" id="1_610fh"]
-
-[node name="EnermyRs" type="Node2D"]
-script = ExtResource("1_610fh")

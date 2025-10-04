@@ -80,6 +80,9 @@ radius = 67.0075
 y_sort_enabled = true
 script = ExtResource("1_1t06j")
 
+[node name="skill_timer" type="Timer" parent="."]
+wait_time = 5.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 16)
 scale = Vector2(0.8125, 0.8125)
@@ -218,6 +221,15 @@ offset_bottom = 100.0
 
 [node name="sound_levelup" type="AudioStreamPlayer2D" parent="GUILayer/GUI/levelup"]
 unique_name_in_owner = true
+
+[node name="coins_display" type="Label" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 29.0
+offset_top = 33.0
+offset_right = 69.0
+offset_bottom = 56.0
+text = "coin :"
 
 [connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="attack/ice_cubeTimer" to="." method="_on_ice_cube_timer_timeout"]

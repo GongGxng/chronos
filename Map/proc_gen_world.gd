@@ -58,7 +58,7 @@ func _ready():
 
 func generate_world():
 	noise.seed = rng_seed
-	map = map_num.pick_random()
+	map = 1#map_num.pick_random()
 	print("map_num : ",map)
 	emit_signal("map_number", map)
 	if map == 0:

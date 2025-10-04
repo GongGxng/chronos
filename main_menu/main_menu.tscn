@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://w1juyrv5tgom"]
+[gd_scene load_steps=2 format=3 uid="uid://w1juyrv5tgom"]
 
 [ext_resource type="Script" uid="uid://fkdwpvv7evy8" path="res://main_menu/main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://tykj8js7fut4" path="res://main_menu/image.png" id="2_d3a7t"]
 
 [node name="MainMenu" type="Control"]
 physics_interpolation_mode = 0
@@ -14,9 +13,9 @@ grow_vertical = 2
 script = ExtResource("1_06t4h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.270222, 0.270222, 0.270222, 1)
+modulate = Color(0.641934, 0.641934, 0.641934, 1)
 position = Vector2(321, 178)
-texture = ExtResource("2_d3a7t")
+scale = Vector2(0.05, 0.05)
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1

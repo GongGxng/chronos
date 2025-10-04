@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbxhn8gl8psxv"]
+
+[ext_resource type="Texture2D" uid="uid://bis7jbsvac06c" path="res://player/attack/upgrade_icon/none.png" id="1_4dd8x"]
+[ext_resource type="Script" uid="uid://ccvrb8skqrv3s" path="res://main_menu/meta_option/up_button.gd" id="1_h18di"]
+[ext_resource type="Texture2D" uid="uid://busxyi1d4dm1r" path="res://player/attack/upgrade_icon/attack_speed.png" id="2_h18di"]
+[ext_resource type="Resource" uid="uid://c5iemrqmorgf1" path="res://main_menu/meta_option/resources/test_doo.tres" id="2_nm2hh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nm2hh"]
+font_size = 11
+
+[node name="up_button" type="PanelContainer"]
+offset_right = 56.0
+offset_bottom = 56.0
+mouse_filter = 1
+script = ExtResource("1_h18di")
+upgrade_option = ExtResource("2_nm2hh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+show_behind_parent = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="icon_texture" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+texture_normal = ExtResource("1_4dd8x")
+texture_hover = ExtResource("2_h18di")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "i"
+
+[node name="lbl_num" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "5 / 5"
+label_settings = SubResource("LabelSettings_nm2hh")
+horizontal_alignment = 1
+
+[node name="level_bar" type="ProgressBar" parent="MarginContainer/VBoxContainer/lbl_num"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 56.0
+offset_bottom = 16.0
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/icon_texture" to="." method="_on_texture_button_pressed"]

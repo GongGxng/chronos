@@ -69,7 +69,8 @@ func update_star():
 			paths = 4
 			attack_size = 1 * (1 + (player.spell_size))
 			attack_speed = 5 * (1 - player.spell_cooldown)
-
+			
+	damage = damageSet + player.damage_inc
 	scale = Vector2(1, 1) * attack_size
 	attackTimer.wait_time = attack_speed
 

@@ -17,10 +17,12 @@ var is_game_over = false
 @onready var upgradeOptions = get_node("%upgrade_options")
 @onready var snd_levelup = ("%sound_levelup")
 @onready var itemoptions = preload("res://utility/itemoptions.tscn")
+@onready var coins_display: Label = %coins_display
 
 #slowmotion
 @export var normal_time_scale: float = 1.0
 @export var slowmo_time_scale: float = 0.2
+var is_slowmo_active : bool = false
 
 #level&experience
 @onready var expbar = get_node("%expbar")
@@ -53,27 +55,32 @@ var enemy_close = []
 #upgrade
 var collected_upgrade = []
 var upgrade_options = []
+var damage_inc = 0
 var armor = 0
 var speed = 0
 var spell_cooldown = 0
 var spell_size = 0
 var additional_attacks = 0
+var coins_collect = 0
 
 func _ready() -> void:
+	upgrade_effect()
 	upgrade_charecter("ice_cube1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
-func _physics_process(_delta):
-	movement()
+func activate_slowmo():
+	is_slowmo_active = true
+	Engine.time_scale = slowmo_time_scale
 
-#zoom function
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			camera_2d.zoom *= 1.1
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			camera_2d.zoom *= 0.9
+func deactivate_slowmo():
+	is_slowmo_active = false
+	Engine.time_scale = normal_time_scale
+
+func _physics_process(_delta):
+	up_date_coin_colleted()
+	skill_active()
+	movement()
 
 func attack():
 	if ice_cube_level > 0:
@@ -97,7 +104,7 @@ func spawn_star():
 		if  i.has_method("update_star"):
 			i.update_star()
 
-func movement():
+func movement() -> void:
 	var x_mov = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_mov = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	var mov = Vector2(x_mov, y_mov)	
@@ -113,15 +120,12 @@ func update_time(delta: float) -> void:
 	if is_game_over:
 		return
 	
-	# ลดเวลาตาม delta
 	current_time -= delta
 	
-	# อัปเดตตัวแสดงเวลา
 	var minute = floor(current_time) / 60
 	var second = int(current_time) % 60
 	timelabel.text = "%02d:%02d" % [minute, second]
 
-	# ตรวจสอบว่าเวลาหมดหรือไม่
 	if current_time <= 1:
 		trigger_game_over()
 	
@@ -142,12 +146,11 @@ func _process(_delta: float) -> void:
 		Sprite.flip_h = true
 
 func _on_hurtbox_hurt(damage, _angle, _knockback) -> void:
-	current_time -= clamp(damage-armor ,1 ,999) #max(0, current_time - damage)
+	current_time -= clamp(damage-armor ,1 ,999)
 
 func _on_ice_cube_timer_timeout() -> void:
 	ice_cube_ammo += ice_cube_base_ammo + additional_attacks
 	ice_cube_attack_timer.start()
-
 
 func _on_ice_cube_attack_timer_timeout() -> void:
 	if ice_cube_ammo > 0:
@@ -196,15 +199,19 @@ func _on_collectarea_area_entered(area:Area2D) -> void:
 		elif area.has_method("collect_coin"):
 			var coin_amount = area.collect_coin()
 			SaveDb.coins += coin_amount
+			coins_collect += coin_amount
 			"""var upgrade_menu = get_node("res://main_menu/upgrade_menu.tscn")
 			if upgrade_menu:
 				upgrade_menu.coins += coin_amount
 				print("Coin collected! Added coins: ", coin_amount, " Total coins: ", upgrade_menu.coins)"""
 
+func up_date_coin_colleted():
+	coins_display.text = str("Coin : ",coins_collect)
+
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
 	collected_experience += gem_exp
-	if experience + collected_experience >= exp_required: #level up
+	if experience + collected_experience >= exp_required:
 		collected_experience -= exp_required-experience
 		experience_level += 1
 		expbar_label.text = "Level %d" % experience_level 
@@ -328,3 +335,55 @@ func get_random_item():
 		return randomitem
 	else:
 		return null
+
+@onready var grabarea: Area2D = $grabarea
+
+func upgrade_effect():
+	for i in SaveDb.upgrades.keys():
+		match i:
+			"atditional_attack_lv":
+				additional_attacks = SaveDb.upgrades[i]
+			"attack_size_lv":
+				spell_size = 0.10 * SaveDb.upgrades[i]
+			"attack_spd_lv":
+				spell_cooldown = 0.05 * SaveDb.upgrades[i]
+			"damage_lv":
+				damage_inc = SaveDb.upgrades[i]
+			"grab_area_lv":
+				grabarea.scale = Vector2(1, 1) * (1 + (0.2 * SaveDb.upgrades[i]))
+
+func skill_active():
+	if Input.is_action_pressed("active_skill"):
+		activate_slowmo()
+	else:
+		deactivate_slowmo()
+
+func teleport_to_mouse():
+	var mouse_pos = get_global_mouse_position()
+	global_position = mouse_pos
+
+@onready var skill_timer: Timer = $skill_timer
+var can_teleport : bool = true
+
+func start_cooldown():
+	can_teleport = false
+	skill_timer.start()
+	skill_timer.timeout.connect(func():
+		can_teleport = true
+		print("Teleport ready again!")
+		return can_teleport)
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and Input.is_action_pressed("active_skill"):
+		if can_teleport:
+			teleport_to_mouse()
+			start_cooldown()
+
+	# Zoom in/out with mouse wheel
+	"""
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			camera_2d.zoom *= 1.1
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			camera_2d.zoom *= 0.9
+	"""

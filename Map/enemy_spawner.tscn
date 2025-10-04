@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyww5tfaimfuj"]
+[gd_scene load_steps=10 format=3 uid="uid://dyww5tfaimfuj"]
 
 [ext_resource type="Script" uid="uid://dqt7oaqrdh1c5" path="res://Map/enemy_spawner.gd" id="1_ika85"]
 [ext_resource type="Script" uid="uid://doaivcgqay564" path="res://Map/spawn_info.gd" id="2_ihtp3"]
-[ext_resource type="PackedScene" uid="uid://0xl1gx0xa1fx" path="res://enemy/enemy_zombie.tscn" id="3_ujwhj"]
-[ext_resource type="PackedScene" uid="uid://cdc4duhai505w" path="res://enemy/orc_boss.tscn" id="4_ujwhj"]
+[ext_resource type="PackedScene" uid="uid://0xl1gx0xa1fx" path="res://enemy/Enemy/enemy_zombie.tscn" id="3_ujwhj"]
+[ext_resource type="PackedScene" uid="uid://dl5hkt34pmvy0" path="res://enemy/Enemy/robot_weak.tscn" id="4_31m7f"]
+[ext_resource type="PackedScene" uid="uid://cdc4duhai505w" path="res://enemy/Enemy/orc_boss.tscn" id="4_ujwhj"]
 
 [sub_resource type="Resource" id="Resource_ihtp3"]
 script = ExtResource("2_ihtp3")
@@ -11,6 +12,16 @@ time_start = 0
 time_end = 999999
 enemy = ExtResource("3_ujwhj")
 enemy_num = 2
+enemy_spawn_delay = 0
+map_can_spawn = 1
+metadata/_custom_type_script = "uid://doaivcgqay564"
+
+[sub_resource type="Resource" id="Resource_31m7f"]
+script = ExtResource("2_ihtp3")
+time_start = 0
+time_end = 1000
+enemy = ExtResource("4_31m7f")
+enemy_num = 1
 enemy_spawn_delay = 0
 map_can_spawn = 1
 metadata/_custom_type_script = "uid://doaivcgqay564"
@@ -38,7 +49,7 @@ metadata/_custom_type_script = "uid://doaivcgqay564"
 [node name="enemy_spawner" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ika85")
-spawn = Array[ExtResource("2_ihtp3")]([SubResource("Resource_ihtp3"), SubResource("Resource_ujwhj"), SubResource("Resource_a0w1e")])
+spawn = Array[ExtResource("2_ihtp3")]([SubResource("Resource_ihtp3"), SubResource("Resource_31m7f"), SubResource("Resource_ujwhj"), SubResource("Resource_a0w1e")])
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

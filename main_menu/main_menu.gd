@@ -6,7 +6,6 @@ extends Control
 @onready var audio = $Audio
 
 func _ready():
-	# เปิดมาให้เห็น Menu ก่อน
 	menu.show()
 	options.hide()
 	video.hide()
