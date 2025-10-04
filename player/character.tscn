@@ -79,6 +79,7 @@ radius = 67.0075
 [node name="Character001" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 script = ExtResource("1_1t06j")
+current_time = 61
 
 [node name="skill_timer" type="Timer" parent="."]
 wait_time = 5.0
@@ -230,6 +231,88 @@ offset_top = 33.0
 offset_right = 69.0
 offset_bottom = 56.0
 text = "coin :"
+
+[node name="dead_scene_menu" type="Control" parent="GUILayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GUILayer/dead_scene_menu"]
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUILayer/dead_scene_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -25.0
+offset_right = 70.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUILayer/dead_scene_menu/HBoxContainer"]
+layout_mode = 2
+
+[node name="times_survived" type="Label" parent="GUILayer/dead_scene_menu/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "time survived"
+
+[node name="coins_colleted" type="Label" parent="GUILayer/dead_scene_menu/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "coin colleted"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUILayer/dead_scene_menu/HBoxContainer"]
+layout_mode = 2
+
+[node name="times_num" type="Label" parent="GUILayer/dead_scene_menu/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "123"
+
+[node name="coins_num" type="Label" parent="GUILayer/dead_scene_menu/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "123"
+
+[node name="restart" type="Button" parent="GUILayer/dead_scene_menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -608.0
+offset_top = -64.0
+offset_right = -536.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Restart"
+
+[node name="back" type="Button" parent="GUILayer/dead_scene_menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 536.0
+offset_top = -64.0
+offset_right = 608.0
+offset_bottom = -32.0
+grow_vertical = 0
+text = "Back"
 
 [connection signal="timeout" from="skill_timer" to="." method="_on_skill_timer_timeout"]
 [connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]

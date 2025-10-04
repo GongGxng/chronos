@@ -9,6 +9,8 @@ var upgrades = {
 	"attack_size_lv": 0,
 }
 var coins_spent = 0
+var coins_collected = 0
+var time_survived = 0
 
 const PATH = "user://player_data.json"
 
@@ -16,7 +18,8 @@ func save_game():
 	var data = {
 		"coins": coins,
 		"upgrades": upgrades,
-		"coins_spent": coins_spent
+		"coins_spent": coins_spent,
+		"time_survived": time_survived
 	}
 	var	file = FileAccess.open(PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
@@ -34,3 +37,11 @@ func load_game():
 		coins = data.get("coins", 0)
 		upgrades = data.get("upgrades", upgrades)
 		coins_spent = data.get("coins_spent", 0)
+		time_survived = data.get("time_survived", 0)
+
+
+func highest_score(new_time: int):
+	if new_time > time_survived:
+		time_survived = new_time
+		save_game()
+		print("New highest score saved: ", time_survived)

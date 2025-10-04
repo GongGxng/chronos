@@ -61,6 +61,7 @@ metadata/_custom_type_script = "uid://doaivcgqay564"
 y_sort_enabled = true
 script = ExtResource("1_ika85")
 spawn = Array[ExtResource("2_ihtp3")]([SubResource("Resource_ihtp3"), SubResource("Resource_31m7f"), SubResource("Resource_ujwhj"), SubResource("Resource_a0w1e"), SubResource("Resource_muv7q")])
+hp_growth_rate = 1.3
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

@@ -20,7 +20,6 @@ y_sort_enabled = true
 unique_name_in_owner = true
 
 [node name="Character" parent="y_sort" instance=ExtResource("2_redxk")]
-current_time = 300
 
 [node name="enemy_spawner" parent="y_sort" instance=ExtResource("3_i1pu1")]
 

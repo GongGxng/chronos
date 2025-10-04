@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var hitBox = $hitbox
 
 @export var movement_speed = 15
+@export var base_hp = 10
 @export var hp = 10
 @export var knockback_recovery = 3.5
 @export var experience = 1
@@ -15,14 +16,11 @@ extends CharacterBody2D
 @export var resistance = 10
 @export var enemy_damage = 1
 @export var can_drop_time_orb = true
-@export var hp_growth_rate: float = 1.1
-@export var max_hp: int = 100
 
 var knockback = Vector2.ZERO
 var exp_gem = preload("res://objects/Expgem.tscn")
 var time_orb_scene = preload("res://objects/time_orb.tscn")
 var coins_scene = preload("res://objects/coins.tscn")
-var elapsed_time: float = 0
 
 signal remove_from_array(object)
 
@@ -37,9 +35,6 @@ func _physics_process(delta):
 		Sprite.flip_h = true
 	elif direction.x < -0.1:
 		Sprite.flip_h = false
-
-func _process(delta: float) -> void:
-	elapsed_time += delta
 
 func _ready():
 	hitBox.damage = enemy_damage
@@ -66,7 +61,6 @@ func death():
 	new_gem.global_position = random_position()
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
-	get_scaled_hp()
 	queue_free()
 
 func _on_hurtbox_hurt(damage, angle, knockback_amount) -> void:
@@ -74,8 +68,3 @@ func _on_hurtbox_hurt(damage, angle, knockback_amount) -> void:
 	knockback = angle * knockback_amount
 	if hp <= 0:
 		death()
-var new_hp :int
-func get_scaled_hp() -> int:
-	new_hp += hp * pow(hp_growth_rate, elapsed_time / 60.0)
-	print("Scaled HP: ", new_hp)
-	return int(min(hp, max_hp))

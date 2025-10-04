@@ -1,11 +1,10 @@
 extends CharacterBody2D
 
 @export var movement_speed = 70
-@export var hp = 600
-@export var maxhp = 600
 @export var Character_name = ""
 
 @export var current_time = 100
+
 var is_game_over = false 
 
 @onready var Sprite = $Sprite2D
@@ -18,6 +17,11 @@ var is_game_over = false
 @onready var snd_levelup = ("%sound_levelup")
 @onready var itemoptions = preload("res://utility/itemoptions.tscn")
 @onready var coins_display: Label = %coins_display
+@onready var dead_scene_menu: Control = $GUILayer/dead_scene_menu
+@onready var times_survived: Label = %times_survived
+@onready var coins_colleted: Label = %coins_colleted
+@onready var times_num: Label = %times_num
+@onready var coins_num: Label = %coins_num
 
 #slowmotion
 @export var normal_time_scale: float = 1.0
@@ -65,8 +69,7 @@ var coins_collect = 0
 
 func _ready() -> void:
 	upgrade_effect()
-	upgrade_charecter("ice_cube4")
-	upgrade_charecter("star4")
+	upgrade_charecter("ice_cube1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
@@ -117,24 +120,40 @@ func movement() -> void:
 	elif mov == Vector2.ZERO:
 		animation.play("idle")
 
+var survived_time = {"minute": 0, "second": 0}
+var current_time_for_dp = 0.0
+
 func update_time(delta: float) -> void:
 	if is_game_over:
 		return
 	
 	current_time -= delta
-	
+
 	var minute = floor(current_time) / 60
 	var second = int(current_time) % 60
 	timelabel.text = "%02d:%02d" % [minute, second]
 
+	current_time_for_dp += delta
+	var minute_dp = floor(current_time_for_dp) / 60
+	var second_dp = int(current_time_for_dp) % 60
+	survived_time.minute = int(minute_dp)
+	survived_time.second = int(second_dp)
+
 	if current_time <= 1:
 		trigger_game_over()
-	
+
 func trigger_game_over() -> void:
 	is_game_over = true
 	get_tree().paused = true
+	dead_scene_menu.visible = true
 	#Engine.time_scale = slowmo_time_scale
-	print("Game Over")
+
+	var total_time_survived = survived_time.minute * 60 + survived_time.second
+	SaveDb.highest_score(total_time_survived)
+
+	print("Survived Time: %02d:%02d" % [survived_time.minute, survived_time.second])
+	times_num.text = "%02d:%02d" % [survived_time.minute, survived_time.second]
+	coins_num.text = str(coins_collect)
 
 func _process(delta: float) -> void:
 	if not is_game_over:
@@ -187,7 +206,6 @@ func _on_grabarea_area_entered(area:Area2D) -> void:
 
 func _on_time_orb_collected(amount: int) -> void:
 	current_time += amount
-	print("Time orb collected! Added time: ", amount, " Current time: ", current_time)
 
 func _on_collectarea_area_entered(area:Area2D) -> void:
 	if area.is_in_group("loot"):
@@ -201,13 +219,10 @@ func _on_collectarea_area_entered(area:Area2D) -> void:
 			var coin_amount = area.collect_coin()
 			SaveDb.coins += coin_amount
 			coins_collect += coin_amount
-			"""var upgrade_menu = get_node("res://main_menu/upgrade_menu.tscn")
-			if upgrade_menu:
-				upgrade_menu.coins += coin_amount
-				print("Coin collected! Added coins: ", coin_amount, " Total coins: ", upgrade_menu.coins)"""
 
 func up_date_coin_colleted():
 	coins_display.text = str("Coin : ",coins_collect)
+	SaveDb.coins_collected = coins_collect
 
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
@@ -294,8 +309,6 @@ func upgrade_charecter(upgrade):
 			additional_attacks += 1
 		"food":
 			pass
-			hp += 20
-			hp = clamp(hp,0,maxhp)
 
 	attack()
 

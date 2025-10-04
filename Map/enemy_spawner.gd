@@ -5,7 +5,8 @@ extends Node2D
 
 @export var spawn: Array[Spawn_info] = []
 @export var time = 0
-@export var hp_growth_rate: float = 1.1  
+@export var hp_growth_rate: float = 10
+@export var base_hp: int = 1.3
 
 var map_numselection = 0
 
@@ -28,8 +29,14 @@ func _on_timer_timeout():
 					while counter < i.enemy_num:
 						var enemy_spawn = new_enemy.instantiate()
 						enemy_spawn.global_position = get_random_position()
+						enemy_spawn.hp = get_scaled_hp()
 						add_child(enemy_spawn)
 						counter += 1
+						print(enemy_spawn.hp)
+
+func get_scaled_hp() -> int:
+	var scaled_hp = base_hp * pow(hp_growth_rate, time / 30)
+	return int(scaled_hp)
 
 func get_random_position():
 	var vpr = get_viewport_rect().size * randf_range(1.1,1.4)

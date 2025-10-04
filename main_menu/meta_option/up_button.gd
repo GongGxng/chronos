@@ -17,10 +17,6 @@ extends PanelContainer
 signal upgrade_hovered(name_type, description)
 
 func _ready():
-	"""if upgrade_option == null:
-		pass
-	for i in SaveDb.upgrades.keys():
-		print("SaveDb_check",SaveDb.upgrades[i])"""
 	upgrade_option.upgrade_type()
 	update()
 	emit_signal("upgrade_hovered", name_type, description)
