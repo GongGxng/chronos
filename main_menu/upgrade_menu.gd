@@ -6,6 +6,7 @@ var start_game = "res://start_game.tscn"
 var main_menu = "res://main_menu/main_menu.tscn"
 var name_type = ""
 var description = ""
+var cost = 0
 
 func _process(_delta: float) -> void:
 	label.text = str(SaveDb.coins)
@@ -19,7 +20,7 @@ func _on_start_pressed() -> void:
 func _on_up_button_mouse_entered() -> void:
 	var mouse_position = get_global_mouse_position()
 	var popup_position = Rect2(mouse_position.x + 10, mouse_position.y + 10, 0, 0)
-	Descrition.itempop_up(popup_position, name_type, description)
+	Descrition.itempop_up(popup_position, name_type, description, cost)
 
 func _on_up_button_mouse_exited() -> void:
 	Descrition.hideitempop_up()
@@ -32,10 +33,7 @@ func _on_confirm_button_pressed() -> void:
 	SaveDb.save_game()
 	get_tree().reload_current_scene()
 
-func _on_up_button_upgrade_hovered(name_type:Variant, description:Variant) -> void:
+func _on_up_button_upgrade_hovered(name_type:Variant, description:Variant, cost:Variant) -> void:
 	self.name_type = name_type
 	self.description = description
-
-func _on_up_button_2_upgrade_hovered(name_type:Variant, description:Variant) -> void:
-	self.name_type = name_type
-	self.description = description
+	self.cost = cost

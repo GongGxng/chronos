@@ -63,7 +63,6 @@ motion_mode = 1
 script = ExtResource("1_dp161")
 movement_speed = 10
 hp = 50
-resistance = 5
 
 [node name="Sprite2" type="Sprite2D" parent="."]
 position = Vector2(-1.42109e-14, 36)

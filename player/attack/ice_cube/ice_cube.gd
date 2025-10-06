@@ -34,16 +34,34 @@ func _ready():
 			attack_size = 1.2 * (1 + (player.spell_size))
 		3:
 			hp = 4
-			speed = 200
+			speed = 170
 			damage = 8
 			knockback_amount = 140
 			attack_size = 1.4 * (1 + (player.spell_size))
 		4:
 			hp = 4
+			speed = 200
+			damage = 10
+			knockback_amount = 140
+			attack_size = 1.4 * (1 + (player.spell_size))
+		5:
+			hp = 4
+			speed = 250
+			damage = 10
+			knockback_amount = 145
+			attack_size = 1.8 * (1 + (player.spell_size))
+		6:
+			hp = 6
 			speed = 300
+			damage = 15
+			knockback_amount = 150
+			attack_size = 2 * (1 + (player.spell_size))
+		7:
+			hp = 6
+			speed = 350
 			damage = 20
-			knockback_amount = 160
-			attack_size = 1.6 * (1 + (player.spell_size))
+			knockback_amount = 150
+			attack_size = 2.2 * (1 + (player.spell_size))
 
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(1, 1) * attack_size, 0.1).set_trans(tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)

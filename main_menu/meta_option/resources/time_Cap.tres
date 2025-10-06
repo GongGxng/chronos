@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=2 format=3 uid="uid://c62dycmxyka3h"]
+
+[ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_267me"]
+
+[resource]
+script = ExtResource("1_267me")
+name_enum = 8
+name = ""
+name_dp = "Increase Time Cap"
+description = ""
+cost = 0
+level = 0
+max_level = 0
+metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

@@ -7,7 +7,7 @@ const WEAPON_PATH = "res://player/attack/weapon_icon/"
 const UPGRADES = {
         "ice_cube1": {
             "icon": WEAPON_PATH + "ice_cube.png",
-            "displayname": "ice_cube",
+            "displayname": "Ice cube",
             "details": "A cube of ice is thrown at a random enemy",
             "level": "Level: 1",
             "prerequisite": [],
@@ -15,7 +15,7 @@ const UPGRADES = {
         },
         "ice_cube2": {
             "icon": WEAPON_PATH + "ice_cube.png",
-            "displayname": "ice_cube",
+            "displayname": "Ice cube",
             "details": "An addition ice cube is thrown",
             "level": "Level: 2",
             "prerequisite": ["ice_cube1"],
@@ -23,23 +23,47 @@ const UPGRADES = {
         },
         "ice_cube3": {
             "icon": WEAPON_PATH + "ice_cube.png",
-            "displayname": "ice_cube",
-            "details": "ice cubes now pass through another enemy and do + 3 damage",
+            "displayname": "Ice cube",
+            "details": "ice cubes now pass through another enemy",
             "level": "Level: 3",
             "prerequisite": ["ice_cube2"],
             "type": "weapon"
         },
         "ice_cube4": {
             "icon": WEAPON_PATH + "ice_cube.png",
-            "displayname": "ice_cube",
+            "displayname": "Ice cube",
             "details": "An additional 2 ice cubes are thrown",
             "level": "Level: 4",
             "prerequisite": ["ice_cube3"],
             "type": "weapon"
         },
+        "ice_cube5": {
+            "icon": WEAPON_PATH + "ice_cube.png",
+            "displayname": "Ice cube",
+            "details": "Increases the damage of ice cubes",
+            "level": "Level: 5",
+            "prerequisite": ["ice_cube4"],
+            "type": "weapon"
+        },
+        "ice_cube6": {
+            "icon": WEAPON_PATH + "ice_cube.png",
+            "displayname": "Ice cube",
+            "details": "An additional ice cube is thrown",
+            "level": "Level: 6",
+            "prerequisite": ["ice_cube5"],
+            "type": "weapon"
+        },
+        "ice_cube7": {
+            "icon": WEAPON_PATH + "ice_cube.png",
+            "displayname": "Ice cube",
+            "details": "ice cubes now pass through another enemy and do + 3 damage",
+            "level": "Level: 7",
+            "prerequisite": ["ice_cube6"],
+            "type": "weapon"
+        },
         "star1": {
             "icon": WEAPON_PATH + "star.png",
-            "displayname": "star",
+            "displayname": "Star",
             "details": "A magical star will follow you attacking enemies in a straight line",
             "level": "Level: 1",
             "prerequisite": [],
@@ -47,7 +71,7 @@ const UPGRADES = {
         },
         "star2": {
             "icon": WEAPON_PATH + "star.png",
-            "displayname": "star",
+            "displayname": "Star",
             "details": "The star will now attack an additional enemy per attack",
             "level": "Level: 2",
             "prerequisite": ["star1"],
@@ -55,7 +79,7 @@ const UPGRADES = {
         },
         "star3": {
             "icon": WEAPON_PATH + "star.png",
-            "displayname": "star",
+            "displayname": "Star",
             "details": "The star will attack another additional enemy per attack",
             "level": "Level: 3",
             "prerequisite": ["star2"],
@@ -63,10 +87,34 @@ const UPGRADES = {
         },
         "star4": {
             "icon": WEAPON_PATH + "star.png",
-            "displayname": "star",
-            "details": "The star now does + 5 damage per attack and causes 20% additional knockback",
+            "displayname": "Star",
+            "details": "The star now does + 5 damage per attack",
             "level": "Level: 4",
             "prerequisite": ["star3"],
+            "type": "weapon"
+        },
+        "star5": {
+            "icon": WEAPON_PATH + "star.png",
+            "displayname": "Star",
+            "details": "The star will now attack an additional enemy per attack + 1 more star",
+            "level": "Level: 5",
+            "prerequisite": ["star4"],
+            "type": "weapon"
+        },
+        "star6": {
+            "icon": WEAPON_PATH + "star.png",
+            "displayname": "Star",
+            "details": "The star will attack another additional enemy per attack",
+            "level": "Level: 6",
+            "prerequisite": ["star5"],
+            "type": "weapon"
+        },
+        "star7": {
+            "icon": WEAPON_PATH + "star.png",
+            "displayname": "Star",
+            "details": "The star now does + 5 damage per attack",
+            "level": "Level: 7",
+            "prerequisite": ["star6"],
             "type": "weapon"
         },
         "speed1": {
@@ -181,11 +229,44 @@ const UPGRADES = {
             "prerequisite": ["ring1"],
             "type": "upgrade"
         },
-        "armor": {
+        "armor1": {
             "icon": ICON_PATH + "armor.png",
             "displayname": "Armor",
-            "details": "Increase your Time N/A by 20.",
-            "level": "N/A",
+            "details": "Reduce damage taken",
+            "level": "1",
+            "prerequisite": [],
             "type": "item",
-            },
+        },
+        "armor2": {
+            "icon": ICON_PATH + "armor.png",
+            "displayname": "Armor",
+            "details": "Reduce damage taken",
+            "level": "2",
+            "prerequisite": ["armor1"],
+            "type": "item",
+        },
+        "armor3": {
+            "icon": ICON_PATH + "armor.png",
+            "displayname": "Armor",
+            "details": "Reduce damage taken",
+            "level": "3",
+            "prerequisite": ["armor2"],
+            "type": "item",
+        },
+        "armor4": {
+            "icon": ICON_PATH + "armor.png",
+            "displayname": "Armor",
+            "details": "Reduce damage taken",
+            "level": "4",
+            "prerequisite": ["armor3"],
+            "type": "item",
+        },
+        "food": {
+            "icon": ICON_PATH + "none.png",
+            "displayname": "Food",
+            "details": "None",
+            "level": "None",
+            "prerequisite": [],
+            "type": "item",
+        }
     }

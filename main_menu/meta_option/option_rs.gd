@@ -12,13 +12,29 @@ class_name UpgradeOption_rs
 @export var level: int = 0
 @export var max_level: int
 
+"""
+grab_area_lv": 0,
+damage_lv": 0,
+attack_spd_lv": 0,
+additional_attack_lv": 0,
+attack_size_lv": 0,
+increase_time_start_lv": 0,
+reduce_damage_taken_lv": 0,
+max_time_lv": 0
+boost_coins_lv": 0
+"""
+
 enum NameEnum {
     none,
     grab_area,
     damage,
     attack_spd,
-    atditionnal_attack,
-    attack_size
+    additional_attack,
+    attack_size,
+    increase_time_start,
+    reduce_damage_taken,
+    max_time,
+    boost_coins_lv
 }
 
 func upgrade_type():
@@ -33,11 +49,23 @@ func upgrade_type():
             name = "attack_spd_lv"
             name_dp = "Attack Speed"
         4:
-            name = "atditional_attack_lv"
+            name = "additional_attack_lv"
             name_dp = "Additional Attack"
         5:
             name = "attack_size_lv"
             name_dp = "Attack Size"
+        6:
+            name = "increase_time_start_lv"
+            name_dp = "Increase Time Start"
+        7:
+            name = "reduce_damage_taken_lv"
+            name_dp = "Reduce Damage Taken"
+        8:
+            name = "max_time_lv"
+            name_dp = "Max Time"
+        9:
+            name = "boost_coins_lv"
+            name_dp = "Boost EXP"
         _:
             name = "none"
             name_dp = "None"

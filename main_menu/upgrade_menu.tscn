@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo3g37al27m3h"]
+[gd_scene load_steps=12 format=3 uid="uid://bo3g37al27m3h"]
 
 [ext_resource type="Script" uid="uid://bk5qyui6whgw6" path="res://main_menu/upgrade_menu.gd" id="1_aht8p"]
 [ext_resource type="PackedScene" uid="uid://dbxhn8gl8psxv" path="res://main_menu/meta_option/up_button.tscn" id="3_np1eh"]
+[ext_resource type="Resource" uid="uid://c8mn0wyayufll" path="res://main_menu/meta_option/resources/additional_attack.tres" id="4_5qd3j"]
 [ext_resource type="Resource" uid="uid://jj2obdgeqsum" path="res://main_menu/meta_option/resources/attack_speed.tres" id="4_al5mg"]
 [ext_resource type="PackedScene" uid="uid://bc1wl5w01j1gp" path="res://main_menu/meta_option/descrition.tscn" id="4_mnd5f"]
+[ext_resource type="Resource" uid="uid://cqvbejridi6rt" path="res://main_menu/meta_option/resources/armor.tres" id="5_it7yf"]
+[ext_resource type="Resource" uid="uid://ofev2c1g2t8v" path="res://main_menu/meta_option/resources/attack_size.tres" id="6_y4jrl"]
+[ext_resource type="Resource" uid="uid://ikx8p8820u1e" path="res://main_menu/meta_option/resources/damage.tres" id="8_n2y6c"]
+[ext_resource type="Resource" uid="uid://co3v705e0holt" path="res://main_menu/meta_option/resources/exp_boost.tres" id="9_mgxiq"]
+[ext_resource type="Resource" uid="uid://c62dycmxyka3h" path="res://main_menu/meta_option/resources/time_Cap.tres" id="10_p5iis"]
+[ext_resource type="Resource" uid="uid://c2uk6bxb7fvk0" path="res://main_menu/meta_option/resources/time_starter.tres" id="11_dh4dr"]
 
 [node name="Upgrade_menu" type="Control"]
 layout_mode = 3
@@ -63,27 +70,104 @@ text = "Reset
 layout_mode = 1
 offset_bottom = 0.119965
 
-[node name="up_button" parent="." instance=ExtResource("3_np1eh")]
+[node name="addtional_att" parent="." instance=ExtResource("3_np1eh")]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 100.0
+upgrade_option = ExtResource("4_5qd3j")
 
-[node name="up_button2" parent="." instance=ExtResource("3_np1eh")]
+[node name="armor" parent="." instance=ExtResource("3_np1eh")]
 layout_mode = 0
 offset_left = 104.0
 offset_top = 40.0
 offset_right = 160.0
 offset_bottom = 100.0
+upgrade_option = ExtResource("5_it7yf")
+
+[node name="size" parent="." instance=ExtResource("3_np1eh")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 100.0
+upgrade_option = ExtResource("6_y4jrl")
+
+[node name="att_speed" parent="." instance=ExtResource("3_np1eh")]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 40.0
+offset_right = 320.0
+offset_bottom = 100.0
 upgrade_option = ExtResource("4_al5mg")
+
+[node name="damage" parent="." instance=ExtResource("3_np1eh")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 120.0
+offset_right = 80.0
+offset_bottom = 180.0
+upgrade_option = ExtResource("8_n2y6c")
+
+[node name="coin_boost" parent="." instance=ExtResource("3_np1eh")]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 180.0
+upgrade_option = ExtResource("9_mgxiq")
+
+[node name="grap_area" parent="." instance=ExtResource("3_np1eh")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 120.0
+offset_right = 240.0
+offset_bottom = 180.0
+
+[node name="time_cap" parent="." instance=ExtResource("3_np1eh")]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 120.0
+offset_right = 320.0
+offset_bottom = 180.0
+upgrade_option = ExtResource("10_p5iis")
+
+[node name="time_starter" parent="." instance=ExtResource("3_np1eh")]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 199.0
+offset_right = 80.0
+offset_bottom = 259.0
+upgrade_option = ExtResource("11_dh4dr")
 
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="reset_button" to="." method="_on_confirm_button_pressed"]
-[connection signal="mouse_entered" from="up_button" to="." method="_on_up_button_mouse_entered"]
-[connection signal="mouse_exited" from="up_button" to="." method="_on_up_button_mouse_exited"]
-[connection signal="upgrade_hovered" from="up_button" to="." method="_on_up_button_upgrade_hovered"]
-[connection signal="mouse_entered" from="up_button2" to="." method="_on_up_button_mouse_entered"]
-[connection signal="mouse_exited" from="up_button2" to="." method="_on_up_button_mouse_exited"]
-[connection signal="upgrade_hovered" from="up_button2" to="." method="_on_up_button_2_upgrade_hovered"]
+[connection signal="mouse_entered" from="addtional_att" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="addtional_att" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="addtional_att" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="armor" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="armor" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="armor" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="size" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="size" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="size" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="att_speed" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="att_speed" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="att_speed" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="damage" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="damage" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="damage" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="coin_boost" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="coin_boost" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="coin_boost" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="grap_area" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="grap_area" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="grap_area" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="time_cap" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="time_cap" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="time_cap" to="." method="_on_up_button_upgrade_hovered"]
+[connection signal="mouse_entered" from="time_starter" to="." method="_on_up_button_mouse_entered"]
+[connection signal="mouse_exited" from="time_starter" to="." method="_on_up_button_mouse_exited"]
+[connection signal="upgrade_hovered" from="time_starter" to="." method="_on_up_button_upgrade_hovered"]

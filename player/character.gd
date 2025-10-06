@@ -66,10 +66,11 @@ var spell_cooldown = 0
 var spell_size = 0
 var additional_attacks = 0
 var coins_collect = 0
+var max_time = 600
 
 func _ready() -> void:
 	upgrade_effect()
-	upgrade_charecter("ice_cube1")
+	upgrade_character("ice_cube1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
@@ -146,6 +147,7 @@ func trigger_game_over() -> void:
 	is_game_over = true
 	get_tree().paused = true
 	dead_scene_menu.visible = true
+	dead_scene_menu.z_index = 1
 	#Engine.time_scale = slowmo_time_scale
 
 	var total_time_survived = survived_time.minute * 60 + survived_time.second
@@ -275,7 +277,7 @@ func level_up():
 
 	"Engine.time_scale = slowmo_time_scale"
 
-func upgrade_charecter(upgrade):
+func upgrade_character(upgrade):
 	match upgrade:
 		"ice_cube1":
 			ice_cube_level = 1
@@ -288,6 +290,13 @@ func upgrade_charecter(upgrade):
 		"ice_cube4":
 			ice_cube_level = 4
 			ice_cube_base_ammo += 2
+		"ice_cube5":
+			ice_cube_level = 5
+		"ice_cube6":
+			ice_cube_level = 6
+			ice_cube_base_ammo += 1
+		"ice_cube7":
+			ice_cube_level = 7
 		"star1":
 			star_level = 1
 			star_ammo = 1
@@ -297,6 +306,13 @@ func upgrade_charecter(upgrade):
 			star_level = 3
 		"star4":
 			star_level = 4
+		"star5":
+			star_level = 5
+			star_ammo = 2
+		"star6":
+			star_level = 6
+		"star7":
+			star_level = 7
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
@@ -355,7 +371,7 @@ func get_random_item():
 func upgrade_effect():
 	for i in SaveDb.upgrades.keys():
 		match i:
-			"atditional_attack_lv":
+			"additional_attack_lv":
 				additional_attacks = SaveDb.upgrades[i]
 			"attack_size_lv":
 				spell_size = 0.10 * SaveDb.upgrades[i]
@@ -364,7 +380,17 @@ func upgrade_effect():
 			"damage_lv":
 				damage_inc = SaveDb.upgrades[i]
 			"grab_area_lv":
-				grabarea.scale = Vector2(1, 1) * (1 + (0.2 * SaveDb.upgrades[i]))
+				grabarea.scale = Vector2(1, 1) * (1 + (0.15 * SaveDb.upgrades[i]))
+			"increase_time_start_lv":
+				current_time += 10 * SaveDb.upgrades[i]
+			"max_time_lv":
+				max_time += 20 * SaveDb.upgrades[i]
+			"reduce_damage_taken_lv":
+				armor = SaveDb.upgrades[i]
+			"boost_coins_lv":
+				coins_collect = int(coins_collect * (1 + 0.1 * SaveDb.upgrades[i]))
+			
+			
 
 func skill_active():
 	if Input.is_action_pressed("active_skill"):

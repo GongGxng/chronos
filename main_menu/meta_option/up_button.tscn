@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bis7jbsvac06c" path="res://player/attack/upgrade_icon/none.png" id="1_4dd8x"]
 [ext_resource type="Script" uid="uid://ccvrb8skqrv3s" path="res://main_menu/meta_option/up_button.gd" id="1_h18di"]
 [ext_resource type="Texture2D" uid="uid://busxyi1d4dm1r" path="res://player/attack/upgrade_icon/attack_speed.png" id="2_h18di"]
-[ext_resource type="Resource" uid="uid://c5iemrqmorgf1" path="res://main_menu/meta_option/resources/test_doo.tres" id="2_nm2hh"]
+[ext_resource type="Resource" uid="uid://c5iemrqmorgf1" path="res://main_menu/meta_option/resources/grap_area.tres" id="2_nm2hh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nm2hh"]
 font_size = 11

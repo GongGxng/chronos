@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=2 format=3 uid="uid://c5iemrqmorgf1"]
+
+[ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_1l3rp"]
+
+[resource]
+script = ExtResource("1_1l3rp")
+name_enum = 1
+name = ""
+name_dp = ""
+description = "des_test"
+cost = 1
+level = 0
+max_level = 10
+metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

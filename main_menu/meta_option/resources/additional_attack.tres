@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=2 format=3 uid="uid://c8mn0wyayufll"]
+
+[ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_f8yg8"]
+
+[resource]
+script = ExtResource("1_f8yg8")
+name_enum = 4
+name = ""
+name_dp = "Addtitional Attack"
+description = ""
+cost = 100
+level = 0
+max_level = 2
+metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

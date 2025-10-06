@@ -2,7 +2,7 @@ extends Area2D
 
 var level = 1
 var hp = 9999
-var damage = 10
+var damage = 5
 var speed = 200
 var knockback_amount = 100
 var paths = 1
@@ -69,6 +69,30 @@ func update_star():
 			paths = 4
 			attack_size = 1 * (1 + (player.spell_size))
 			attack_speed = 5 * (1 - player.spell_cooldown)
+		5:
+			hp = 9999
+			speed = speedSet + 50
+			damage = damageSet + 5
+			knockback_amount = 120
+			paths = 4
+			attack_size = 1 * (1 + (player.spell_size))
+			attack_speed = 4 * (1 - player.spell_cooldown)
+		6:
+			hp = 9999
+			speed = speedSet + 100
+			damage = damageSet + 5
+			knockback_amount = 120
+			paths = 5
+			attack_size = 1 * (1 + (player.spell_size))
+			attack_speed = 4 * (1 - player.spell_cooldown)
+		7:
+			hp = 9999
+			speed = speedSet + 150
+			damage = damageSet + 10
+			knockback_amount = 140
+			paths = 5
+			attack_size = 1.2 * (1 + (player.spell_size))
+			attack_speed = 3 * (1 - player.spell_cooldown)
 			
 	damage = damageSet + player.damage_inc
 	scale = Vector2(1, 1) * attack_size

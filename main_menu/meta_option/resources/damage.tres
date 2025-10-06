@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=2 format=3 uid="uid://ikx8p8820u1e"]
+
+[ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_5tef1"]
+
+[resource]
+script = ExtResource("1_5tef1")
+name_enum = 2
+name = ""
+name_dp = "Damage"
+description = "damage increase"
+cost = 0
+level = 0
+max_level = 0
+metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

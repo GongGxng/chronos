@@ -234,6 +234,7 @@ text = "coin :"
 
 [node name="dead_scene_menu" type="Control" parent="GUILayer"]
 visible = false
+z_index = -2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -242,6 +243,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="GUILayer/dead_scene_menu"]
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 

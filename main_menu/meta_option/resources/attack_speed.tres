@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=4 format=3 uid="uid://jj2obdgeqsum"]
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=3 format=3 uid="uid://jj2obdgeqsum"]
 
 [ext_resource type="Texture2D" uid="uid://busxyi1d4dm1r" path="res://player/attack/upgrade_icon/attack_speed.png" id="1_gbty8"]
 [ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="2_831fo"]
-[ext_resource type="Texture2D" uid="uid://b5hk1luxlb7ml" path="res://player/attack/weapon_icon/ice_cubetest.png" id="2_nek7n"]
 
 [resource]
 script = ExtResource("2_831fo")
@@ -11,7 +10,6 @@ name = ""
 name_dp = "Attack speed"
 description = "increase your attack speed"
 icon = ExtResource("1_gbty8")
-icon_hover = ExtResource("2_nek7n")
 cost = 5
 level = 0
 max_level = 7

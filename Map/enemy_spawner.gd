@@ -5,18 +5,22 @@ extends Node2D
 
 @export var spawn: Array[Spawn_info] = []
 @export var time = 0
-@export var hp_growth_rate: float = 10
-@export var base_hp: int = 1.3
+@export var hp_growth_rate: float = 1.5
+@onready var base_hp: int = 0
+@onready var base_resistance: int = 0
 
 var map_numselection = 0
 
 func _on_proc_gen_world_map_number(map:int) -> void:
-	print("received map: ", map)
 	map_numselection = map
+
+var enemy_cap = 250
+var enemy_to_spawn = []
 
 func _on_timer_timeout():
 	time += 1
 	var enemy_spawns = spawn
+	var get_children = get_children()
 	for i in enemy_spawns:
 		if i.map_can_spawn == map_numselection:
 			if time >= i.time_start and time <= i.time_end:
@@ -27,16 +31,38 @@ func _on_timer_timeout():
 					var new_enemy = i.enemy
 					var counter = 0
 					while counter < i.enemy_num:
-						var enemy_spawn = new_enemy.instantiate()
-						enemy_spawn.global_position = get_random_position()
-						enemy_spawn.hp = get_scaled_hp()
-						add_child(enemy_spawn)
+						if get_children.size() <= enemy_cap:
+							var enemy_spawn = new_enemy.instantiate()
+							enemy_spawn.global_position = get_random_position()
+							base_hp = enemy_spawn.hp
+							base_resistance = enemy_spawn.resistance
+							enemy_spawn.resistance = get_scaled_resistance()
+							enemy_spawn.hp = get_scaled_hp()
+							add_child(enemy_spawn)
+						else :
+							enemy_to_spawn.append(new_enemy)
 						counter += 1
-						print(enemy_spawn.hp)
+	if get_children.size() <= enemy_cap and enemy_to_spawn.size() > 0:
+		var spawn_number = clamp(enemy_to_spawn.size(),1,50) - 1
+		var counter = 0
+		while counter < spawn_number:
+			var enemy_spawn = enemy_to_spawn[0].instantiate()
+			enemy_spawn.global_position = get_random_position()
+			base_hp = enemy_spawn.hp
+			base_resistance = enemy_spawn.resistance
+			enemy_spawn.resistance = get_scaled_resistance()
+			enemy_spawn.hp = get_scaled_hp()
+			add_child(enemy_spawn)
+			enemy_to_spawn.remove_at(0)
+			counter += 1
 
 func get_scaled_hp() -> int:
 	var scaled_hp = base_hp * pow(hp_growth_rate, time / 30)
 	return int(scaled_hp)
+
+func get_scaled_resistance() -> int:
+	var scaled_resistance = base_resistance * pow(hp_growth_rate, time / 30)
+	return int(scaled_resistance)
 
 func get_random_position():
 	var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
