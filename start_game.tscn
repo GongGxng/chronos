@@ -1,14 +1,55 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy6oigr1830f7"]
+[gd_scene load_steps=17 format=3 uid="uid://cy6oigr1830f7"]
 
 [ext_resource type="Script" uid="uid://bxdifmt6ckqjt" path="res://start_game.gd" id="1_i1pu1"]
 [ext_resource type="PackedScene" uid="uid://dvutjrushh2kc" path="res://Map/proc_gen_world.tscn" id="1_ipysq"]
-[ext_resource type="PackedScene" uid="uid://30vmw6kcp6p5" path="res://player/character.tscn" id="2_redxk"]
 [ext_resource type="PackedScene" uid="uid://dyww5tfaimfuj" path="res://Map/enemy_spawner.tscn" id="3_i1pu1"]
 [ext_resource type="Texture2D" uid="uid://26ii62yor0m3" path="res://texture/pixilart-drawing.png" id="4_mywg3"]
 [ext_resource type="PackedScene" uid="uid://cobj0hilcud10" path="res://objects/Expgem.tscn" id="5_vmqqe"]
 [ext_resource type="PackedScene" uid="uid://c30dmscl4ogfb" path="res://objects/time_orb.tscn" id="6_xpden"]
 [ext_resource type="PackedScene" uid="uid://wsjurfq44xh" path="res://main_menu/pause_memu.tscn" id="7_redxk"]
 [ext_resource type="PackedScene" uid="uid://g5ob7r4gi72l" path="res://objects/coins.tscn" id="8_mywg3"]
+[ext_resource type="PackedScene" uid="uid://uuxou4l6kw2r" path="res://main_menu/dead_scene_menu.tscn" id="9_vmqqe"]
+[ext_resource type="Environment" uid="uid://bo5thmu2acww6" path="res://start_game.tres" id="10_vmqqe"]
+[ext_resource type="AudioStream" uid="uid://dy8276i7iahgb" path="res://sound/116-bpm-oldschool-electronica-18063.mp3" id="11_xpden"]
+[ext_resource type="AudioStream" uid="uid://dhso2vqmpt8yp" path="res://sound/cinematic-background-291979.mp3" id="12_fxinc"]
+[ext_resource type="AudioStream" uid="uid://casdqcl3wjl8e" path="res://sound/cinematic-music-sketches-11-cinematic-percussion-sketch-116186.mp3" id="13_eccuu"]
+
+[sub_resource type="Animation" id="Animation_xpden"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skill_info2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vmqqe"]
+resource_name = "fade"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skill_info2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xsqwj"]
+_data = {
+&"RESET": SubResource("Animation_xpden"),
+&"fade": SubResource("Animation_vmqqe")
+}
 
 [node name="Start_game" type="Node2D"]
 script = ExtResource("1_i1pu1")
@@ -18,8 +59,6 @@ y_sort_enabled = true
 
 [node name="proc_gen_world" parent="y_sort" instance=ExtResource("1_ipysq")]
 unique_name_in_owner = true
-
-[node name="Character" parent="y_sort" instance=ExtResource("2_redxk")]
 
 [node name="enemy_spawner" parent="y_sort" instance=ExtResource("3_i1pu1")]
 
@@ -31,21 +70,40 @@ texture = ExtResource("4_mywg3")
 region_enabled = true
 region_rect = Rect2(-0.25, 0, 4000, 4000)
 
+[node name="skill_info2" type="Label" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 188.0
+offset_bottom = 44.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "space bar to activate skill"
+
+[node name="skill_info" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xsqwj")
+}
+
 [node name="loot" type="Node2D" parent="."]
 
 [node name="Exp" parent="loot" instance=ExtResource("5_vmqqe")]
-position = Vector2(-221, -122)
+position = Vector2(41498, -74)
 experience = 2500
 
 [node name="Time_orb" parent="loot" instance=ExtResource("6_xpden")]
-position = Vector2(0, -144)
+position = Vector2(41634, -88)
+time_orb_amount = 10000
 
 [node name="coins" parent="loot" instance=ExtResource("8_mywg3")]
-position = Vector2(157, -115)
-coins = 10
-
-[node name="coins2" parent="loot" instance=ExtResource("8_mywg3")]
-position = Vector2(188, -118)
+position = Vector2(41791, -59)
 coins = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -53,4 +111,22 @@ layer = 0
 
 [node name="pause_memu" parent="CanvasLayer" instance=ExtResource("7_redxk")]
 
+[node name="dead_scene_menu2" parent="CanvasLayer" instance=ExtResource("9_vmqqe")]
+visible = false
+
+[node name="eva" type="WorldEnvironment" parent="."]
+environment = ExtResource("10_vmqqe")
+
+[node name="music1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_xpden")
+
+[node name="music2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_fxinc")
+volume_db = -30.0
+
+[node name="music3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_eccuu")
+volume_db = -15.0
+
 [connection signal="map_number" from="y_sort/proc_gen_world" to="y_sort/enemy_spawner" method="_on_proc_gen_world_map_number"]
+[connection signal="timeout" from="skill_info" to="." method="_on_skill_info_timeout"]

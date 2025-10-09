@@ -15,6 +15,7 @@ var upgrades = {
 var coins_spent = 0
 var coins_collected = 0
 var time_survived = 0
+var character_selected_part = ""
 
 func ensure_upgrade_keys():
 	for k in upgrades:
@@ -29,7 +30,8 @@ func save_game():
 		"coins": coins,
 		"upgrades": upgrades,
 		"coins_spent": coins_spent,
-		"time_survived": time_survived
+		"time_survived": time_survived,
+		"character_selected_part": character_selected_part,
 	}
 	var	file = FileAccess.open(PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
@@ -50,6 +52,7 @@ func load_game():
 		upgrades = data.get("upgrades", upgrades)
 		coins_spent = data.get("coins_spent", 0)
 		time_survived = data.get("time_survived", 0)
+		character_selected_part = data.get("character_selected_part", "res://player/character.tscn")
 
 func highest_score(new_time: int):
 	if new_time > time_survived:

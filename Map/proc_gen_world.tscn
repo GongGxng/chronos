@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvutjrushh2kc"]
+[gd_scene load_steps=9 format=3 uid="uid://dvutjrushh2kc"]
 
 [ext_resource type="Script" uid="uid://cct2s567ajqo1" path="res://Map/proc_gen_world.gd" id="1_8ht5p"]
 [ext_resource type="TileSet" uid="uid://dgklfopu36ld" path="res://Map/proc_gen_world.tres" id="2_2aqej"]
+[ext_resource type="PackedScene" uid="uid://b13p52286hccr" path="res://Map/parallax_background.tscn" id="3_ivhox"]
 
 [sub_resource type="Gradient" id="Gradient_2aqej"]
 interpolation_mode = 1
@@ -45,3 +46,6 @@ tile_set = ExtResource("2_2aqej")
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("2_2aqej")
+
+[node name="ParallaxBackground" parent="TileMap2" instance=ExtResource("3_ivhox")]
+layer = 1

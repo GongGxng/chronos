@@ -46,16 +46,18 @@ func random_position():
 
 func death():
 	emit_signal("remove_from_array", self)
-	if can_drop_time_orb:
-		var new_time_orb = time_orb_scene.instantiate()
-		new_time_orb.global_position = random_position()
-		new_time_orb.time_orb_amount = time_orb_amount
-		loot_base.call_deferred("add_child", new_time_orb)
+	if randi() % 4 == 0:
+		if can_drop_time_orb:
+			var new_time_orb = time_orb_scene.instantiate()
+			new_time_orb.global_position = random_position()
+			new_time_orb.time_orb_amount = time_orb_amount
+			loot_base.call_deferred("add_child", new_time_orb)
 
-	var new_coins = coins_scene.instantiate()
-	new_coins.global_position = random_position()
-	new_coins.coins = coins_amount
-	loot_base.call_deferred("add_child", new_coins)
+	if randi() % 2 == 0:
+		var new_coins = coins_scene.instantiate()
+		new_coins.global_position = random_position()
+		new_coins.coins = coins_amount
+		loot_base.call_deferred("add_child", new_coins)
 	var new_gem = exp_gem.instantiate()
 	new_gem.global_position = random_position()
 	new_gem.experience = experience

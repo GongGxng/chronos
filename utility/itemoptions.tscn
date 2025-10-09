@@ -50,10 +50,10 @@ autowrap_mode = 3
 
 [node name="lbl_level" type="Label" parent="."]
 layout_mode = 0
-offset_left = 139.0
-offset_top = 1.0
-offset_right = 175.0
-offset_bottom = 24.0
+offset_left = 125.0
+offset_top = 6.0
+offset_right = 161.0
+offset_bottom = 29.0
 text = "1"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

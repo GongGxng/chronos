@@ -26,8 +26,7 @@ var spr_star_attack = preload("res://player/attack/star/staratt.png")
 @onready var attackTimer = get_node("%attacktimer")
 @onready var changedirectionTimer = get_node("%changedirection")
 @onready var resetPostimer = get_node("%resetpostimer")
-@onready var snd__attack = $snd_attack
-
+@onready var snd__attack: AudioStreamPlayer2D = $snd_attack
 signal remove_from_array(object)
 
 func _ready() -> void:

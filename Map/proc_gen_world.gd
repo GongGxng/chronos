@@ -10,8 +10,8 @@ var prop_noise : Noise
 @onready var ground_2_tile_layer: TileMapLayer = $TileMap2/ground2
 @onready var prop_tile_layer: TileMapLayer = $TileMap2/prop
 
-var width = 250
-var height = 250
+var width = 300
+var height = 300
 
 var source_id = 0
 
@@ -33,11 +33,11 @@ var prop_arr_dirt = [Vector2i(7,0),Vector2i(6,0)]
 
 # lava tiles
 var ground_lava_arr = [Vector2i(0,3),Vector2i(1,3),Vector2i(2,3),Vector2i(0,4),Vector2i(1,4),Vector2i(2,4),Vector2i(0,5),Vector2i(1,5),Vector2i(2,5)]
-var prop_lava_arr = [Vector2i(0,6),Vector2i(1,6),Vector2i(2,6)]
+var prop_lava_arr = [Vector2i(0,6),Vector2i(1,6),Vector2i(2,6),Vector2i(0,7)]
 
 # brick tiles
 var mos_brick_arr = [Vector2i(3,3),Vector2i(4,3),Vector2i(5,3),Vector2i(3,4),Vector2i(4,4),Vector2i(5,4),Vector2i(3,5),Vector2i(4,5),Vector2i(5,5)]
-var prop_brick_arr = [Vector2i(6,3),Vector2i(6,4),Vector2i(6,5),Vector2i(7,4)]
+var prop_brick_arr = [Vector2i(6,3),Vector2i(6,4),Vector2i(6,5),Vector2i(7,4),Vector2i(8,3)]
 
 # electic floor
 var future_arr = [Vector2i(3,9),Vector2i(4,9),Vector2i(5,9),Vector2i(3,10),Vector2i(4,10),Vector2i(5,10),Vector2i(3,11),Vector2i(4,11),Vector2i(5,11)]
@@ -58,7 +58,7 @@ func _ready():
 
 func generate_world():
 	noise.seed = rng_seed
-	map = 1#map_num.pick_random()
+	map = map_num.pick_random()
 	print("map_num : ",map)
 	emit_signal("map_number", map)
 	if map == 0:

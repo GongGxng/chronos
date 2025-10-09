@@ -34,6 +34,10 @@ window/canvas_textures/default_texture_filter=1
 
 enabled=PackedStringArray("res://addons/TimeManager/plugin.cfg", "res://addons/goutte.animated_shape_2d/plugin.cfg")
 
+[gui]
+
+theme/custom_font="uid://c2fqwxoscq6ij"
+
 [input]
 
 move_up={

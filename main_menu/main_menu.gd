@@ -1,5 +1,6 @@
 extends Control
 
+@onready var button_hover: AudioStreamPlayer2D = $button_hover
 @onready var menu = $Menu
 @onready var options = $Options
 @onready var video = $Video
@@ -11,45 +12,28 @@ func _ready():
 	video.hide()
 	audio.hide()
 
-@warning_ignore("unused_parameter")
-func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		toggle()
-
-func toggle():
-	visible = !visible
-	get_tree().paused = visible
-
 func _on_start_pressed() -> void:
-	toggle()
 	get_tree().change_scene_to_file("res://main_menu/upgrade_menu.tscn")
 	SaveDb.load_game()
-
+	
 func _on_options_pressed(): 
 	show_and_hide(options, menu)
-
 
 func show_and_hide(first: Control, second: Control):
 	first.show()
 	second.hide()
 
-
 func _on_exit_pressed() -> void:
 	get_tree().quit()
-
-
 
 func _on_video_pressed() -> void:
 	show_and_hide(video, options)
 
-
 func _on_audio_pressed() -> void:
 	show_and_hide(audio, options)
 
-
 func _on_back_from_options_pressed() -> void:
 	show_and_hide(menu, options)
-
 
 func _on_full_screen_toggled(button_pressed: bool) -> void:
 	if button_pressed:
@@ -87,3 +71,12 @@ func _on_sound_fx_value_changed(value: float) -> void:
 
 func _on_back_from_audio_pressed() -> void:
 	show_and_hide(options, audio)
+
+func _on_start_mouse_entered() -> void:
+	button_hover.play()
+
+func _on_options_mouse_entered() -> void:
+	button_hover.play()
+
+func _on_exit_mouse_entered() -> void:
+	button_hover.play()

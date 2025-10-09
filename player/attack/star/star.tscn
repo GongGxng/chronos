@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bieq0shngjqfc"]
+[gd_scene load_steps=8 format=3 uid="uid://bieq0shngjqfc"]
 
 [ext_resource type="Script" uid="uid://d2ps2v47kf60w" path="res://player/attack/star/star.gd" id="1_4mflf"]
 [ext_resource type="Texture2D" uid="uid://bidjvdeypd6as" path="res://player/attack/star/star2idle.png" id="2_duipk"]
+[ext_resource type="AudioStream" uid="uid://qn807wvr0u2x" path="res://sound/swoosh-018-383967.mp3" id="3_7fty8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mflf"]
 size = Vector2(24, 22)
@@ -53,6 +54,8 @@ wait_time = 3.0
 autostart = true
 
 [node name="snd_attack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7fty8")
+pitch_scale = 0.6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

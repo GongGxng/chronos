@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://8rjsa1xmuee6"]
+[gd_scene load_steps=8 format=3 uid="uid://8rjsa1xmuee6"]
 
 [ext_resource type="Script" uid="uid://dttcl1j4s2pkc" path="res://player/attack/ice_cube/ice_cube.gd" id="1_5edqw"]
 [ext_resource type="Texture2D" uid="uid://0j5kib02q6d5" path="res://player/attack/ice_cube/IMG_0835.PNG" id="2_s0cum"]
+[ext_resource type="AudioStream" uid="uid://dudi25lrsudj1" path="res://sound/iced-magic-3-378609.mp3" id="3_tu86h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2xxb"]
 size = Vector2(4, 15)
@@ -72,5 +73,10 @@ autostart = true
 libraries = {
 &"": SubResource("AnimationLibrary_okxm8")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tu86h")
+volume_db = -10.0
+pitch_scale = 4.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

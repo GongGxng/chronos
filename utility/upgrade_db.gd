@@ -5,6 +5,62 @@ const ICON_PATH = "res://player/attack/upgrade_icon/"
 const WEAPON_PATH = "res://player/attack/weapon_icon/"
 
 const UPGRADES = {
+        "katana1": {
+            "icon": WEAPON_PATH + "katana.png",
+            "displayname": "Katana",
+            "details": "A katana slashes a random enemy",
+            "level": "Level: 1",
+            "prerequisite": [],
+            "type": "weapon"
+        },
+        "katana2": {
+            "icon": WEAPON_PATH + "katana.png",
+            "displayname": "Katana",
+            "details": "An additional katana slashes",
+            "level": "Level: 2",
+            "prerequisite": ["katana1"],
+            "type": "weapon"
+        },
+        "katana3": {
+            "icon": WEAPON_PATH + "katana.png",
+            "displayname": "Katana",
+            "details": "Katanas now pass through another enemy",
+            "level": "Level: 3",
+            "prerequisite": ["katana2"],
+            "type": "weapon"
+        },
+        "katana4": {
+            "icon": WEAPON_PATH + "katana.png",
+            "displayname": "Katana",
+            "details": "An additional 2 katanas are slashed",
+            "level": "Level: 4",
+            "prerequisite": ["katana3"],
+            "type": "weapon"
+        },
+        "katana5": {
+            "icon": WEAPON_PATH + "katana.png",
+            "displayname": "Katana",
+            "details": "Increases the damage of katanas",
+            "level": "Level: 5",
+            "prerequisite": ["katana4"],
+            "type": "weapon"
+        },
+        "katana6": {
+            "icon": WEAPON_PATH + "katana.png",
+            "displayname": "Katana",
+            "details": "An additional katana is slashed",
+            "level": "Level: 6",
+            "prerequisite": ["katana5"],
+            "type": "weapon"
+        },
+        "katana7": {
+            "icon": WEAPON_PATH + "katana.png",
+            "displayname": "Katana",
+            "details": "Katanas now pass through another enemy and do + 3 damage",
+            "level": "Level: 7",
+            "prerequisite": ["katana6"],
+            "type": "weapon"
+        },
         "ice_cube1": {
             "icon": WEAPON_PATH + "ice_cube.png",
             "displayname": "Ice cube",

@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://esnfw2f6pph0"]
+
+[ext_resource type="Script" uid="uid://c0moroycycotp" path="res://enemy/enemy_code/golem.gd" id="1_djnlv"]
+[ext_resource type="Texture2D" uid="uid://5f62khthm033" path="res://enemy/image_enemy/Golem.png" id="2_1v5e0"]
+[ext_resource type="PackedScene" uid="uid://c8mppk6beyulp" path="res://utility/hurt_box.tscn" id="3_h47af"]
+[ext_resource type="PackedScene" uid="uid://byxlprmy3k5oa" path="res://utility/hit_box.tscn" id="4_duf1p"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b31y"]
+radius = 9.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_6f005"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gwdgb"]
+resource_name = "golem_walk"
+length = 2.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ifi0"]
+_data = {
+&"RESET": SubResource("Animation_6f005"),
+&"golem_walk": SubResource("Animation_gwdgb")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_08go0"]
+radius = 32.0
+height = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_04q52"]
+radius = 32.0
+height = 64.0
+
+[node name="Golem" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_djnlv")
+movement_speed = 10
+base_hp = 300
+hp = 300
+knockback_recovery = 5.0
+time_orb_amount = 3
+coins_amount = 3
+resistance = 15
+enemy_damage = 10
+
+[node name="Sprite2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 29.4354)
+scale = Vector2(1.53125, 1.55636)
+texture = ExtResource("2_1v5e0")
+offset = Vector2(0, -19.76)
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("CapsuleShape2D_0b31y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0ifi0")
+}
+
+[node name="hurtbox" parent="." instance=ExtResource("3_h47af")]
+collision_layer = 4
+collision_mask = 4
+hurtboxtype = 1
+
+[node name="CollisionShape2D" parent="hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_08go0")
+
+[node name="hitbox" parent="." instance=ExtResource("4_duf1p")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_04q52")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]
+
+[editable path="hurtbox"]
+[editable path="hitbox"]

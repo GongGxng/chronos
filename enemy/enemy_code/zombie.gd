@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var Sprite = $Sprite2D2
 @onready var animation = $AnimationPlayer
 @onready var hitBox = $hitbox
+@onready var zombie_dead = $zombie_dead
 
 @export var movement_speed = 25
 @export var hp = 10
@@ -15,7 +16,6 @@ extends CharacterBody2D
 @export var resistance = 10
 @export var enemy_damage = 1
 @export var can_drop_time_orb = true
-
 
 var collide = Vector2.ZERO
 var knockback = Vector2.ZERO
@@ -63,6 +63,7 @@ func death():
 	new_gem.global_position = random_position()
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
+	zombie_dead.play()
 	queue_free()
 	
 func _on_hurtbox_hurt(damage, angle, knockback_amount) -> void:

@@ -5,7 +5,7 @@ extends Node2D
 
 @export var spawn: Array[Spawn_info] = []
 @export var time = 0
-@export var hp_growth_rate: float = 1.5
+@export var hp_growth_rate: float = 1.3
 @onready var base_hp: int = 0
 @onready var base_resistance: int = 0
 
@@ -14,8 +14,19 @@ var map_numselection = 0
 func _on_proc_gen_world_map_number(map:int) -> void:
 	map_numselection = map
 
-var enemy_cap = 250
+var enemy_cap = 200
 var enemy_to_spawn = []
+
+func _ready() -> void:
+	_find_player_deferred()
+
+func _find_player_deferred() -> void:
+	call_deferred("_find_player")
+
+func _find_player() -> void:
+	if player == null:
+		player = get_tree().get_first_node_in_group("player")
+
 
 func _on_timer_timeout():
 	time += 1
@@ -57,11 +68,11 @@ func _on_timer_timeout():
 			counter += 1
 
 func get_scaled_hp() -> int:
-	var scaled_hp = base_hp * pow(hp_growth_rate, time / 30)
+	var scaled_hp = base_hp * pow(hp_growth_rate, time / 60)
 	return int(scaled_hp)
 
 func get_scaled_resistance() -> int:
-	var scaled_resistance = base_resistance * pow(hp_growth_rate, time / 30)
+	var scaled_resistance = base_resistance * pow(hp_growth_rate, time / 60)
 	return int(scaled_resistance)
 
 func get_random_position():

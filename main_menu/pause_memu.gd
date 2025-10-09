@@ -23,17 +23,22 @@ func esc():
 		resume()
 
 func _on_resume_pressed() -> void:
-	resume()
+	if get_tree().paused == true:
+		resume()
 
 func _on_restart_pressed() -> void:
-	resume()
-	get_tree().reload_current_scene()
+	if get_tree().paused == true:
+		resume()
+		get_tree().reload_current_scene()
 
 func _on_quit_pressed() -> void:
 	if get_tree().paused == true:
 		get_tree().paused = false
-	get_tree().change_scene_to_file(upgrade_menu)
-	SaveDb.save_game()
+		get_tree().change_scene_to_file(upgrade_menu)
+		SaveDb.save_game()
 
 func _process(_delta: float) -> void:
 	esc()
+
+func _on_character_game_over() -> void:
+	set_process(false)

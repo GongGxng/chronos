@@ -56,16 +56,16 @@ func upgrade_type():
             name_dp = "Attack Size"
         6:
             name = "increase_time_start_lv"
-            name_dp = "Increase Time Start"
+            name_dp = "Starter Time"
         7:
             name = "reduce_damage_taken_lv"
-            name_dp = "Reduce Damage Taken"
+            name_dp = "Armor"
         8:
             name = "max_time_lv"
             name_dp = "Max Time"
         9:
             name = "boost_coins_lv"
-            name_dp = "Boost EXP"
+            name_dp = "Coins Boost"
         _:
             name = "none"
             name_dp = "None"

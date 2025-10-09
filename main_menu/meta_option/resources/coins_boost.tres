@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=4 format=3 uid="uid://co3v705e0holt"]
+
+[ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_2g5jf"]
+[ext_resource type="Texture2D" uid="uid://qtpm2oxb7mw7" path="res://main_menu/upgrade_button/boost_coin1.png" id="1_3ex8i"]
+[ext_resource type="Texture2D" uid="uid://bgjm3h0qbyy4x" path="res://main_menu/upgrade_button/boost_coin2.png" id="2_v5s67"]
+
+[resource]
+script = ExtResource("1_2g5jf")
+name_enum = 9
+name = ""
+name_dp = "Coins Boost"
+description = "Increases the amount of coins earned during gameplay."
+icon = ExtResource("1_3ex8i")
+icon_hover = ExtResource("2_v5s67")
+cost = 1000
+level = 0
+max_level = 5
+metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

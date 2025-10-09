@@ -38,7 +38,7 @@ func _physics_process(delta):
 
 func _ready():
 	hitBox.damage = enemy_damage
-	animation.play("orcwalk")
+	animation.play("walk")
 
 func random_position():
 	var random_offset = Vector2(randf_range(-10, 10), randf_range(-10, 10))

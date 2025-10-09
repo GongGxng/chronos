@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=2 format=3 uid="uid://c2uk6bxb7fvk0"]
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=4 format=3 uid="uid://c2uk6bxb7fvk0"]
 
+[ext_resource type="Texture2D" uid="uid://jwcjroa1c0j2" path="res://main_menu/upgrade_button/increase_time_start1.png" id="1_8cd81"]
 [ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_arp4u"]
+[ext_resource type="Texture2D" uid="uid://lnu073kvpkhy" path="res://main_menu/upgrade_button/increase_time_start2.png" id="2_7nhqn"]
 
 [resource]
 script = ExtResource("1_arp4u")
 name_enum = 6
 name = ""
 name_dp = "Increase Starter Time"
-description = ""
-cost = 0
+description = "Adds extra starting time when the game begins."
+icon = ExtResource("1_8cd81")
+icon_hover = ExtResource("2_7nhqn")
+cost = 500
 level = 0
-max_level = 0
+max_level = 10
 metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

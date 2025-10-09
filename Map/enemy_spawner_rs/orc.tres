@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Spawn_info" load_steps=3 format=3 uid="uid://b40odniecv80j"]
+
+[ext_resource type="PackedScene" uid="uid://esnfw2f6pph0" path="res://enemy/Enemy/Golem.tscn" id="1_7dft1"]
+[ext_resource type="Script" uid="uid://doaivcgqay564" path="res://Map/spawn_info.gd" id="2_6dlr0"]
+
+[resource]
+script = ExtResource("2_6dlr0")
+time_start = 120
+time_end = 125
+enemy = ExtResource("1_7dft1")
+enemy_num = 10
+enemy_spawn_delay = 1
+map_can_spawn = 0
+metadata/_custom_type_script = "uid://doaivcgqay564"

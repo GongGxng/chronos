@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://d4evgdwyxn8iv"]
+
+[ext_resource type="Script" uid="uid://dhgkff62npujm" path="res://enemy/enemy_code/zombie_blood.gd" id="1_ljqia"]
+[ext_resource type="Texture2D" uid="uid://cybkrtpb450ss" path="res://enemy/image_enemy/Sprite-zombieBlood.png" id="2_emosl"]
+[ext_resource type="PackedScene" uid="uid://c8mppk6beyulp" path="res://utility/hurt_box.tscn" id="3_3lmlc"]
+[ext_resource type="PackedScene" uid="uid://byxlprmy3k5oa" path="res://utility/hit_box.tscn" id="4_kak6d"]
+[ext_resource type="AudioStream" uid="uid://cglbeg4ktfem3" path="res://sound/zombiedie.mp3" id="5_emosl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b31y"]
+radius = 6.0
+height = 12.0
+
+[sub_resource type="Animation" id="Animation_6f005"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gwdgb"]
+resource_name = "walk"
+length = 1.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ifi0"]
+_data = {
+&"RESET": SubResource("Animation_6f005"),
+&"walk": SubResource("Animation_gwdgb")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_08go0"]
+radius = 8.0
+height = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_04q52"]
+radius = 8.0
+height = 36.0
+
+[node name="zombie_blood" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_ljqia")
+movement_speed = 14
+coins_amount = 2
+can_drop_time_orb = false
+
+[node name="Sprite2" type="Sprite2D" parent="."]
+position = Vector2(0, 13)
+scale = Vector2(0.65625, 0.66701)
+texture = ExtResource("2_emosl")
+offset = Vector2(0, -20.93)
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 9)
+shape = SubResource("CapsuleShape2D_0b31y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0ifi0")
+}
+
+[node name="hurtbox" parent="." instance=ExtResource("3_3lmlc")]
+collision_layer = 4
+collision_mask = 4
+hurtboxtype = 1
+
+[node name="CollisionShape2D" parent="hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_08go0")
+
+[node name="hitbox" parent="." instance=ExtResource("4_kak6d")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="hitbox" index="0"]
+shape = SubResource("CapsuleShape2D_04q52")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_emosl")
+
+[connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]
+
+[editable path="hurtbox"]
+[editable path="hitbox"]

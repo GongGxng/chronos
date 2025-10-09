@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=2 format=3 uid="uid://c5iemrqmorgf1"]
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=4 format=3 uid="uid://c5iemrqmorgf1"]
 
 [ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_1l3rp"]
+[ext_resource type="Texture2D" uid="uid://be4ka2vklw4xm" path="res://main_menu/upgrade_button/grab_area1.png" id="1_5lbl2"]
+[ext_resource type="Texture2D" uid="uid://beqvc0165ocjx" path="res://main_menu/upgrade_button/grab_area2.png" id="2_m5bnd"]
 
 [resource]
 script = ExtResource("1_1l3rp")
 name_enum = 1
 name = ""
 name_dp = ""
-description = "des_test"
-cost = 1
+description = "Increases the pickup range for EXP and items."
+icon = ExtResource("1_5lbl2")
+icon_hover = ExtResource("2_m5bnd")
+cost = 500
 level = 0
 max_level = 10
 metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

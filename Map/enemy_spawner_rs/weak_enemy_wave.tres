@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Spawn_info" load_steps=3 format=3 uid="uid://djdqjfuo0q6rd"]
+
+[ext_resource type="PackedScene" uid="uid://d4evgdwyxn8iv" path="res://enemy/Enemy/zombie_blood.tscn" id="1_c5x6b"]
+[ext_resource type="Script" uid="uid://doaivcgqay564" path="res://Map/spawn_info.gd" id="2_02qtr"]
+
+[resource]
+script = ExtResource("2_02qtr")
+time_start = 60
+time_end = 65
+enemy = ExtResource("1_c5x6b")
+enemy_num = 20
+enemy_spawn_delay = 0
+map_can_spawn = 0
+metadata/_custom_type_script = "uid://doaivcgqay564"

@@ -28,7 +28,7 @@ func _process(delta):
         speed += delta * 2
         
 func collect_coin():
-    """sound.play()"""
+    sound.play()
     collision.call_deferred("set", "disabled", true)
     sprite.visible = false
 

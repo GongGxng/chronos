@@ -1,9 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckfvqrvltyjxe"]
+[gd_scene load_steps=13 format=3 uid="uid://ckfvqrvltyjxe"]
 
 [ext_resource type="Script" uid="uid://nd3m05wshvqy" path="res://enemy/Resource_Scene/enemy_resource.gd" id="1_hn4hv"]
+[ext_resource type="Shader" uid="uid://cml4ekmkyaj56" path="res://enemy/Resource_Scene/blink.gdshader" id="2_4p15l"]
 [ext_resource type="Texture2D" uid="uid://dl6n6asphqr4o" path="res://player/image_player/281075558_516860756567930_8764328684380126817_n.jpg" id="2_hn4hv"]
 [ext_resource type="PackedScene" uid="uid://c8mppk6beyulp" path="res://utility/hurt_box.tscn" id="3_t0kjd"]
 [ext_resource type="PackedScene" uid="uid://byxlprmy3k5oa" path="res://utility/hit_box.tscn" id="4_wvf2l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0kjd"]
+shader = ExtResource("2_4p15l")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_intensity = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0b31y"]
 radius = 7.0
@@ -25,7 +31,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_gwdgb"]
-resource_name = "orcwalk"
+resource_name = "walk"
 length = 1.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,7 +50,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ifi0"]
 _data = {
 &"RESET": SubResource("Animation_6f005"),
-&"orcwalk": SubResource("Animation_gwdgb")
+&"walk": SubResource("Animation_gwdgb")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_08go0"]
@@ -65,6 +71,7 @@ movement_speed = 20
 can_drop_time_orb = false
 
 [node name="Sprite2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_t0kjd")
 position = Vector2(0, 18)
 scale = Vector2(0.0187185, 0.0190254)
 texture = ExtResource("2_hn4hv")

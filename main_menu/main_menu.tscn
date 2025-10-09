@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://w1juyrv5tgom"]
+[gd_scene load_steps=7 format=3 uid="uid://w1juyrv5tgom"]
 
 [ext_resource type="Script" uid="uid://fkdwpvv7evy8" path="res://main_menu/main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://c655dl6cbwput" path="res://main_menu/IMG_0894.PNG" id="2_3shxk"]
+[ext_resource type="Texture2D" uid="uid://d11i4mkydstmy" path="res://texture/LogoChonos1 (1).png" id="3_bws42"]
+[ext_resource type="AudioStream" uid="uid://cdfijekw53h1v" path="res://sound/minimalist-button-hover-sound-effect-399749.mp3" id="4_bws42"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3f7m4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_oa53l"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.95158, 0.95158, 0.95158, 0)
+Button/colors/font_focus_color = Color(0.823529, 0.647059, 0.4, 1)
+Button/colors/font_hover_color = Color(0.913725, 0.768627, 0.568627, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_3f7m4")
 
 [node name="MainMenu" type="Control"]
 physics_interpolation_mode = 0
@@ -10,12 +23,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_oa53l")
 script = ExtResource("1_06t4h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.641934, 0.641934, 0.641934, 1)
 position = Vector2(321, 178)
 scale = Vector2(0.05, 0.05)
+
+[node name="Img0894" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-8.88672, 37.5007)
+scale = Vector2(1.00069, 1.00069)
+texture = ExtResource("2_3shxk")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -24,27 +43,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -50.5
-offset_right = 35.0
-offset_bottom = 29.5
+offset_left = -40.0
+offset_top = 42.0
+offset_right = 40.0
+offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Start" type="Button" parent="Menu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 24
 text = "Play"
 
 [node name="Options" type="Button" parent="Menu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 24
 text = "Options"
 
 [node name="Exit" type="Button" parent="Menu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 24
 text = "Exit"
+
+[node name="LogoChonos1(1)" type="Sprite2D" parent="Menu"]
+position = Vector2(40, -94)
+scale = Vector2(0.0666666, 0.0666667)
+texture = ExtResource("3_bws42")
 
 [node name="Options" type="Control" parent="."]
 visible = false
@@ -71,12 +95,12 @@ grow_vertical = 2
 
 [node name="Video" type="Button" parent="Options/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 24
 text = "Video"
 
 [node name="Audio" type="Button" parent="Options/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 24
 text = "Audio"
 
 [node name="BackFromOptions" type="Button" parent="Options"]
@@ -91,6 +115,7 @@ offset_top = -31.0
 offset_right = 22.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 16
 text = "Back"
 
 [node name="Video" type="Control" parent="."]
@@ -121,14 +146,17 @@ layout_mode = 2
 
 [node name="FullScreen" type="Label" parent="Video/HBoxContainer/Labels"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "FullScreen"
 
 [node name="Borderless" type="Label" parent="Video/HBoxContainer/Labels"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Borderless"
 
 [node name="VSync" type="Label" parent="Video/HBoxContainer/Labels"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "VSync"
 
 [node name="Checks" type="VBoxContainer" parent="Video/HBoxContainer"]
@@ -155,6 +183,7 @@ offset_top = -31.0
 offset_right = 22.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 16
 text = "Back"
 
 [node name="Audio" type="Control" parent="."]
@@ -186,19 +215,19 @@ alignment = 1
 
 [node name="Master" type="Label" parent="Audio/HBoxContainer/Labels"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 16
 text = "Master"
 horizontal_alignment = 3
 
 [node name="Music" type="Label" parent="Audio/HBoxContainer/Labels"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 16
 text = "Music"
 horizontal_alignment = 3
 
 [node name="Sound FX" type="Label" parent="Audio/HBoxContainer/Labels"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 16
 text = "Sound FX"
 horizontal_alignment = 3
 
@@ -234,10 +263,18 @@ offset_top = -31.0
 offset_right = 22.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 16
 text = "Back"
 
+[node name="button_hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bws42")
+volume_db = 13.0
+
+[connection signal="mouse_entered" from="Menu/Start" to="." method="_on_start_mouse_entered"]
 [connection signal="pressed" from="Menu/Start" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="Menu/Options" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="Menu/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="Menu/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Options/VBoxContainer/Video" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="Options/VBoxContainer/Audio" to="." method="_on_audio_pressed"]

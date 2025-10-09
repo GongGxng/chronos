@@ -1,14 +1,18 @@
-[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=2 format=3 uid="uid://c62dycmxyka3h"]
+[gd_resource type="Resource" script_class="UpgradeOption_rs" load_steps=4 format=3 uid="uid://c62dycmxyka3h"]
 
 [ext_resource type="Script" uid="uid://cxfrhb0pcwy05" path="res://main_menu/meta_option/option_rs.gd" id="1_267me"]
+[ext_resource type="Texture2D" uid="uid://butug8437j2wk" path="res://main_menu/upgrade_button/max_time1.png" id="1_g10nw"]
+[ext_resource type="Texture2D" uid="uid://bi5bfr7gs47qf" path="res://main_menu/upgrade_button/max_time2.png" id="2_y8f38"]
 
 [resource]
 script = ExtResource("1_267me")
 name_enum = 8
 name = ""
 name_dp = "Increase Time Cap"
-description = ""
-cost = 0
+description = "Increases the maximum time limit the player can hold."
+icon = ExtResource("1_g10nw")
+icon_hover = ExtResource("2_y8f38")
+cost = 500
 level = 0
-max_level = 0
+max_level = 10
 metadata/_custom_type_script = "uid://cxfrhb0pcwy05"

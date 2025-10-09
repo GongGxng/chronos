@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://0xl1gx0xa1fx"]
+[gd_scene load_steps=11 format=3 uid="uid://0xl1gx0xa1fx"]
 
 [ext_resource type="Script" uid="uid://c8swjymntgu1c" path="res://enemy/enemy_code/zombie.gd" id="1_rra00"]
 [ext_resource type="Texture2D" uid="uid://drrsl2fkxd7wf" path="res://enemy/image_enemy/zombie_monster2-Sheet.png" id="2_55j0k"]
 [ext_resource type="PackedScene" uid="uid://c8mppk6beyulp" path="res://utility/hurt_box.tscn" id="4_fyiiq"]
+[ext_resource type="AudioStream" uid="uid://cglbeg4ktfem3" path="res://sound/zombiedie.mp3" id="5_1v7gi"]
 [ext_resource type="PackedScene" uid="uid://byxlprmy3k5oa" path="res://utility/hit_box.tscn" id="5_oe486"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pifkr"]
 radius = 3.0
-height = 16.0
+height = 12.0
 
 [sub_resource type="Animation" id="Animation_esl6b"]
 resource_name = "test"
@@ -46,6 +47,8 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_rra00")
 movement_speed = 12
+hp = 15
+coins_amount = 2
 can_drop_time_orb = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
@@ -57,7 +60,7 @@ hframes = 3
 vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(1, 9)
 shape = SubResource("CapsuleShape2D_pifkr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -80,7 +83,9 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="hitbox" index="0"]
 shape = SubResource("CapsuleShape2D_kqurj")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="zombie_dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1v7gi")
+volume_db = -15.0
 
 [connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]
 

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Spawn_info" load_steps=3 format=3 uid="uid://bhmxq5fjasnot"]
+
+[ext_resource type="PackedScene" uid="uid://cxrwut22hd7pb" path="res://enemy/Enemy/final_boss.tscn" id="1_nmcir"]
+[ext_resource type="Script" uid="uid://doaivcgqay564" path="res://Map/spawn_info.gd" id="2_lmfqk"]
+
+[resource]
+script = ExtResource("2_lmfqk")
+time_start = 240
+time_end = 245
+enemy = ExtResource("1_nmcir")
+enemy_num = 1
+enemy_spawn_delay = 1
+map_can_spawn = 0
+metadata/_custom_type_script = "uid://doaivcgqay564"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cobj0hilcud10"]
+[gd_scene load_steps=8 format=3 uid="uid://cobj0hilcud10"]
 
 [ext_resource type="Texture2D" uid="uid://3tk8a1etnd4u" path="res://objects/exp.PNG" id="1_6ldxy"]
 [ext_resource type="Script" uid="uid://wlonbg80cfo8" path="res://objects/expgem.gd" id="1_ooehg"]
+[ext_resource type="AudioStream" uid="uid://xah7qomaowxj" path="res://sound/game-bonus-02-294436.mp3" id="3_6s6i2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6s6i2"]
 radius = 3.0
@@ -60,6 +61,8 @@ hframes = 7
 shape = SubResource("CapsuleShape2D_6s6i2")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6s6i2")
+volume_db = -20.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

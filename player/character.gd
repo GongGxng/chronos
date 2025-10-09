@@ -3,10 +3,9 @@ extends CharacterBody2D
 @export var movement_speed = 70
 @export var Character_name = ""
 
-@export var current_time = 100
+@export var current_time = 300
 
 var is_game_over = false 
-
 @onready var Sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
 @onready var timelabel = get_node("%Labeltime")
@@ -14,14 +13,11 @@ var is_game_over = false
 #gui
 @onready var level_panal = get_node("%levelup")
 @onready var upgradeOptions = get_node("%upgrade_options")
-@onready var snd_levelup = ("%sound_levelup")
+@onready var snd_levelup = %sound_levelup
 @onready var itemoptions = preload("res://utility/itemoptions.tscn")
 @onready var coins_display: Label = %coins_display
-@onready var dead_scene_menu: Control = $GUILayer/dead_scene_menu
-@onready var times_survived: Label = %times_survived
-@onready var coins_colleted: Label = %coins_colleted
-@onready var times_num: Label = %times_num
-@onready var coins_num: Label = %coins_num
+@onready var times_num = 0
+@onready var coins_num = 0
 
 #slowmotion
 @export var normal_time_scale: float = 1.0
@@ -35,13 +31,25 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 
+#katana
+var katana = preload("res://player/attack/katana/katana.tscn")
+@onready var katana_timer: Timer = $attack/katanaTimer
+@onready var katana_attack_timer = $attack/katanaTimer/katanaAttack
+
 #attack
 var ice_cube = preload("res://player/attack/ice_cube/ice_cube.tscn")
 @onready var ice_cube_timer: Timer = $attack/ice_cubeTimer
 @onready var ice_cube_attack_timer = $attack/ice_cubeTimer/ice_cubeAttackTimer
+
 #star
 var star = preload("res://player/attack/star/star.tscn")
 @onready var starbase = get_node("%starbase")
+
+#katana
+var katana_ammo = 1
+var katana_base_ammo = 0
+var katana_attackspeed = 1
+var katana_level = 0
 
 #ice_cube
 var ice_cube_ammo = 1
@@ -70,7 +78,6 @@ var max_time = 600
 
 func _ready() -> void:
 	upgrade_effect()
-	upgrade_character("ice_cube1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
@@ -88,6 +95,10 @@ func _physics_process(_delta):
 	movement()
 
 func attack():
+	if katana_level > 0:
+		katana_timer.wait_time = katana_attackspeed * (1.0 - spell_cooldown)
+		if katana_timer.is_stopped():
+			katana_timer.start()
 	if ice_cube_level > 0:
 		ice_cube_timer.wait_time = ice_cube_attackspeed * (1.0 - spell_cooldown)
 		if ice_cube_timer.is_stopped():
@@ -143,19 +154,24 @@ func update_time(delta: float) -> void:
 	if current_time <= 1:
 		trigger_game_over()
 
+signal game_over()
+signal time_up(times_num, coins_num)
+
 func trigger_game_over() -> void:
 	is_game_over = true
 	get_tree().paused = true
-	dead_scene_menu.visible = true
-	dead_scene_menu.z_index = 1
+	emit_signal("game_over")
+	"""dead_scene_menu.visible = true
+	dead_scene_menu.z_index = 1"""
 	#Engine.time_scale = slowmo_time_scale
 
 	var total_time_survived = survived_time.minute * 60 + survived_time.second
 	SaveDb.highest_score(total_time_survived)
 
 	print("Survived Time: %02d:%02d" % [survived_time.minute, survived_time.second])
-	times_num.text = "%02d:%02d" % [survived_time.minute, survived_time.second]
-	coins_num.text = str(coins_collect)
+	times_num = "%02d:%02d" % [survived_time.minute, survived_time.second]
+	coins_num = str(coins_collect)
+	emit_signal("time_up", times_num, coins_num)
 
 func _process(delta: float) -> void:
 	if not is_game_over:
@@ -169,6 +185,23 @@ func _process(delta: float) -> void:
 
 func _on_hurtbox_hurt(damage, _angle, _knockback) -> void:
 	current_time -= clamp(damage-armor ,1 ,999)
+	
+func _on_katana_timer_timeout() -> void:
+	katana_ammo = katana_base_ammo + additional_attacks
+	katana_attack_timer.start()
+
+func _on_katana_attack_timeout() -> void:
+	if katana_ammo > 0:
+		var katana_attack = katana.instantiate()
+		katana_attack.position = position
+		katana_attack.target = get_random_target()
+		katana_attack.level = katana_level
+		add_child(katana_attack)
+		katana_ammo -= 1
+		if katana_ammo > 0:
+			katana_attack_timer.start()
+		else:
+			katana_attack_timer.stop()
 
 func _on_ice_cube_timer_timeout() -> void:
 	ice_cube_ammo += ice_cube_base_ammo + additional_attacks
@@ -196,7 +229,6 @@ func get_random_target():
 func _on_enemydetection_area_body_entered(body:Node2D) -> void:
 	if not enemy_close.has(body):
 		enemy_close.append(body)
-
 
 func _on_enemydetection_area_body_exited(body:Node2D) -> void:
 	if enemy_close.has(body):
@@ -258,7 +290,7 @@ func set_expbar(set_value = 1, set_max_value = 100):
 	expbar.max_value = set_max_value
 
 func level_up():
-	"snd_levelup.play()"
+	snd_levelup.play()
 
 	expbar_label.text = "Level %d" % experience_level
 	var tween = level_panal.create_tween()
@@ -279,6 +311,24 @@ func level_up():
 
 func upgrade_character(upgrade):
 	match upgrade:
+		"katana1":
+			katana_level = 1
+			katana_base_ammo += 1
+		"katana2":
+			katana_level = 2
+			katana_base_ammo += 1
+		"katana3":
+			katana_level = 3
+		"katana4":
+			katana_level = 4
+			katana_base_ammo += 2
+		"katana5":
+			katana_level = 5
+		"katana6":
+			katana_level = 6
+			katana_base_ammo += 1
+		"katana7":
+			katana_level = 7
 		"ice_cube1":
 			ice_cube_level = 1
 			ice_cube_base_ammo += 1
