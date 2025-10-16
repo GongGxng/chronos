@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cxrwut22hd7pb"]
 
 [ext_resource type="Script" uid="uid://du1qjwj7if0fk" path="res://enemy/enemy_code/final_boss.gd" id="1_2mir1"]
-[ext_resource type="Texture2D" uid="uid://bh2vgghaql7xe" path="res://enemy/image_enemy/finalBossoneshot.png" id="2_kh8i1"]
+[ext_resource type="Texture2D" uid="uid://ckrjx6g3r2tk1" path="res://enemy/image_enemy/bossSprite-0001.png" id="2_bi011"]
 [ext_resource type="PackedScene" uid="uid://c8mppk6beyulp" path="res://utility/hurt_box.tscn" id="4_i76dj"]
 [ext_resource type="PackedScene" uid="uid://byxlprmy3k5oa" path="res://utility/hit_box.tscn" id="5_xqahd"]
 
@@ -26,7 +26,19 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_0dual"]
 resource_name = "attack"
-length = 1.5
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
 
 [sub_resource type="Animation" id="Animation_gwdgb"]
 resource_name = "walk"
@@ -75,12 +87,12 @@ resistance = 15
 enemy_damage = 5
 
 [node name="Sprite2" type="Sprite2D" parent="."]
-position = Vector2(0, 27.2885)
+position = Vector2(4, 23)
 scale = Vector2(0.520325, 0.528856)
-texture = ExtResource("2_kh8i1")
+texture = ExtResource("2_bi011")
 offset = Vector2(0, -53.62)
-hframes = 2
-vframes = 2
+hframes = 4
+vframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 14)

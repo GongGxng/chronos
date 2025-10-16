@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var hitBox = $hitbox
 @onready var fire_ball_part = "res://enemy/Resource_Scene/boss_attack.tscn"
 @onready var attack_timer: Timer = $attack_timer
+@onready var sprite_3: Sprite2D = $Sprite3
 
 @export var movement_speed = 15
 @export var base_hp = 10
@@ -77,6 +78,8 @@ func attack():
 	var fire_ball = load(fire_ball_part).instantiate()
 	fire_ball.global_position = global_position
 	get_parent().add_child(fire_ball)
+	await get_tree().create_timer(1.6).timeout # Wait for 4 seconds
+	animation.play("walk")
 
 func _on_attack_timer_timeout() -> void:
 	attack()
