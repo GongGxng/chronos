@@ -63,12 +63,15 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_ljqia")
 movement_speed = 14
+base_hp = 15
+hp = 15
 coins_amount = 2
+resistance = 2
 can_drop_time_orb = false
 
 [node name="Sprite2" type="Sprite2D" parent="."]
-position = Vector2(0, 13)
-scale = Vector2(0.65625, 0.66701)
+position = Vector2(0, 14.3296)
+scale = Vector2(0.71875, 0.730535)
 texture = ExtResource("2_emosl")
 offset = Vector2(0, -20.93)
 hframes = 3

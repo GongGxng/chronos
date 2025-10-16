@@ -4,8 +4,10 @@ extends CharacterBody2D
 @export var Character_name = ""
 
 @export var current_time = 300
-
 var is_game_over = false 
+
+
+@onready var gpuparticles_2d: GPUParticles2D = $GPUParticles2D
 @onready var Sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
 @onready var timelabel = get_node("%Labeltime")

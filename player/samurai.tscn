@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://feo0gbkhiit3"]
+[gd_scene load_steps=21 format=3 uid="uid://feo0gbkhiit3"]
 
 [ext_resource type="Script" uid="uid://ce722l7ajljgy" path="res://player/samurai.gd" id="1_2f4ou"]
 [ext_resource type="Shader" uid="uid://cml4ekmkyaj56" path="res://enemy/Resource_Scene/blink.gdshader" id="1_itjaq"]
@@ -8,9 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://sljcmcs2hrch" path="res://texture/exp/หลอดเวลแก้.png" id="5_lesq7"]
 [ext_resource type="AudioStream" uid="uid://deftrd00mkdjx" path="res://sound/experimental-8-bit-sound-270302.mp3" id="6_nxva5"]
 
+[sub_resource type="Gradient" id="Gradient_itjaq"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m6q50"]
+gradient = SubResource("Gradient_itjaq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3rcq5"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_m6q50")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_itjaq"]
 shader = ExtResource("1_itjaq")
-shader_parameter/blink_color = Color(0.856067, 0.856067, 0.856067, 1)
+shader_parameter/blink_color = Color(1, 0.3, 0.3, 1)
 shader_parameter/blink_intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhlcg"]
@@ -88,7 +102,16 @@ y_sort_enabled = true
 script = ExtResource("1_2f4ou")
 
 [node name="skill_timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 20
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3rcq5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_itjaq")
@@ -186,6 +209,19 @@ offset_top = 23.0
 offset_right = 25.0
 offset_bottom = 46.0
 grow_horizontal = 2
+
+[node name="skill_cooldown_bar" type="ProgressBar" parent="GUILayer/GUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 0.1
+value = 100.0
+show_percentage = false
 
 [node name="expbar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true

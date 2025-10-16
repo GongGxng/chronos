@@ -1,11 +1,31 @@
-[gd_scene load_steps=16 format=3 uid="uid://30vmw6kcp6p5"]
+[gd_scene load_steps=21 format=3 uid="uid://30vmw6kcp6p5"]
 
 [ext_resource type="Script" uid="uid://vgyc77vnt708" path="res://player/ice_mage.gd" id="1_vpwc5"]
 [ext_resource type="Texture2D" uid="uid://djnaxh4l4baxh" path="res://player/image_player/heroice1-Sheet.png" id="2_74pxd"]
+[ext_resource type="Shader" uid="uid://cml4ekmkyaj56" path="res://enemy/Resource_Scene/blink.gdshader" id="2_mrkww"]
 [ext_resource type="PackedScene" uid="uid://c8mppk6beyulp" path="res://utility/hurt_box.tscn" id="3_xx22o"]
 [ext_resource type="Texture2D" uid="uid://sljcmcs2hrch" path="res://texture/exp/หลอดเวลแก้.png" id="4_74pxd"]
 [ext_resource type="Texture2D" uid="uid://op1m8fgflmtv" path="res://texture/exp/under_exp.png" id="4_xhlcg"]
 [ext_resource type="AudioStream" uid="uid://deftrd00mkdjx" path="res://sound/experimental-8-bit-sound-270302.mp3" id="6_25es5"]
+
+[sub_resource type="Gradient" id="Gradient_mrkww"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q7cbo"]
+gradient = SubResource("Gradient_mrkww")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_afoxj"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 15.0
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_q7cbo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7cbo"]
+shader = ExtResource("2_mrkww")
+shader_parameter/blink_color = Color(1, 0.3, 0.3, 1)
+shader_parameter/blink_intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhlcg"]
 size = Vector2(7, 3)
@@ -82,9 +102,19 @@ y_sort_enabled = true
 script = ExtResource("1_vpwc5")
 
 [node name="skill_timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 20
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_afoxj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q7cbo")
 position = Vector2(0, 16)
 scale = Vector2(0.8125, 0.8125)
 texture = ExtResource("2_74pxd")
@@ -179,6 +209,19 @@ offset_top = 23.0
 offset_right = 25.0
 offset_bottom = 46.0
 grow_horizontal = 2
+
+[node name="skill_cooldown_bar" type="ProgressBar" parent="GUILayer/GUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 0.1
+value = 100.0
+show_percentage = false
 
 [node name="expbar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true

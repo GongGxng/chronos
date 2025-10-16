@@ -9,6 +9,6 @@ time_start = 120
 time_end = 125
 enemy = ExtResource("1_7dft1")
 enemy_num = 10
-enemy_spawn_delay = 1
+enemy_spawn_delay = 0
 map_can_spawn = 0
 metadata/_custom_type_script = "uid://doaivcgqay564"

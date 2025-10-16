@@ -75,8 +75,8 @@ resistance = 15
 enemy_damage = 5
 
 [node name="Sprite2" type="Sprite2D" parent="."]
-position = Vector2(0, 20.1992)
-scale = Vector2(0.390244, 0.396642)
+position = Vector2(0, 27.2885)
+scale = Vector2(0.520325, 0.528856)
 texture = ExtResource("2_kh8i1")
 offset = Vector2(0, -53.62)
 hframes = 2

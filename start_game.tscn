@@ -59,6 +59,7 @@ y_sort_enabled = true
 
 [node name="proc_gen_world" parent="y_sort" instance=ExtResource("1_ipysq")]
 unique_name_in_owner = true
+scale = Vector2(1.00724, 1)
 
 [node name="enemy_spawner" parent="y_sort" instance=ExtResource("3_i1pu1")]
 
@@ -80,7 +81,7 @@ offset_right = 188.0
 offset_bottom = 44.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
-text = "space bar to activate skill"
+text = "spacebar and click to activate skill"
 
 [node name="skill_info" type="Timer" parent="."]
 wait_time = 5.0

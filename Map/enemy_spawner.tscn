@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dyww5tfaimfuj"]
+[gd_scene load_steps=26 format=3 uid="uid://dyww5tfaimfuj"]
 
 [ext_resource type="Script" uid="uid://dqt7oaqrdh1c5" path="res://Map/enemy_spawner.gd" id="1_ika85"]
 [ext_resource type="Script" uid="uid://doaivcgqay564" path="res://Map/spawn_info.gd" id="2_ihtp3"]
@@ -36,7 +36,7 @@ metadata/_custom_type_script = "uid://doaivcgqay564"
 [sub_resource type="Resource" id="Resource_xax5c"]
 script = ExtResource("2_ihtp3")
 time_start = 90
-time_end = 95
+time_end = 10000000
 enemy = ExtResource("4_ujwhj")
 enemy_num = 1
 enemy_spawn_delay = 0
@@ -109,14 +109,44 @@ time_start = 240
 time_end = 245
 enemy = ExtResource("9_l3i6h")
 enemy_num = 1
-enemy_spawn_delay = 1
+enemy_spawn_delay = 0
 map_can_spawn = 2
+metadata/_custom_type_script = "uid://doaivcgqay564"
+
+[sub_resource type="Resource" id="Resource_f2o0e"]
+script = ExtResource("2_ihtp3")
+time_start = 480
+time_end = 500
+enemy = ExtResource("9_l3i6h")
+enemy_num = 10
+enemy_spawn_delay = 0
+map_can_spawn = 1
+metadata/_custom_type_script = "uid://doaivcgqay564"
+
+[sub_resource type="Resource" id="Resource_t0c1n"]
+script = ExtResource("2_ihtp3")
+time_start = 480
+time_end = 500
+enemy = ExtResource("9_l3i6h")
+enemy_num = 10
+enemy_spawn_delay = 0
+map_can_spawn = 2
+metadata/_custom_type_script = "uid://doaivcgqay564"
+
+[sub_resource type="Resource" id="Resource_keji5"]
+script = ExtResource("2_ihtp3")
+time_start = 480
+time_end = 500
+enemy = ExtResource("9_l3i6h")
+enemy_num = 10
+enemy_spawn_delay = 0
+map_can_spawn = 0
 metadata/_custom_type_script = "uid://doaivcgqay564"
 
 [node name="enemy_spawner" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ika85")
-spawn = Array[ExtResource("2_ihtp3")]([ExtResource("3_muv7q"), ExtResource("4_7t6yc"), ExtResource("5_l3i6h"), ExtResource("6_kym5a"), ExtResource("7_1s6tl"), SubResource("Resource_k87vo"), SubResource("Resource_c6tde"), SubResource("Resource_xax5c"), SubResource("Resource_2htge"), SubResource("Resource_0h50f"), SubResource("Resource_d2oqj"), SubResource("Resource_xvce6"), SubResource("Resource_di72b"), SubResource("Resource_ffhep"), SubResource("Resource_vskl1")])
+spawn = Array[ExtResource("2_ihtp3")]([ExtResource("3_muv7q"), ExtResource("4_7t6yc"), ExtResource("5_l3i6h"), ExtResource("6_kym5a"), ExtResource("7_1s6tl"), SubResource("Resource_k87vo"), SubResource("Resource_c6tde"), SubResource("Resource_xax5c"), SubResource("Resource_2htge"), SubResource("Resource_0h50f"), SubResource("Resource_d2oqj"), SubResource("Resource_xvce6"), SubResource("Resource_di72b"), SubResource("Resource_ffhep"), SubResource("Resource_vskl1"), SubResource("Resource_f2o0e"), SubResource("Resource_t0c1n"), SubResource("Resource_keji5")])
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
